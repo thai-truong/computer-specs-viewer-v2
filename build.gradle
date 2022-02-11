@@ -47,6 +47,8 @@ dependencies {
         exclude(group: 'org.openjfx')
     }
 
+    implementation 'com.github.oshi:oshi-core:6.1.0'
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }

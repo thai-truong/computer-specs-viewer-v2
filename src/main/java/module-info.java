@@ -10,6 +10,8 @@ module com.example.computerspecsviewer {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
+    requires com.github.oshi;
+
     opens com.example.computerspecsviewer to javafx.fxml;
     exports com.example.computerspecsviewer;
 }
