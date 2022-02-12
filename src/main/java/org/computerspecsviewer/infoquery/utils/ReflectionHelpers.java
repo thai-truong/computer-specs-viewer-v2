@@ -1,35 +1,63 @@
 package org.computerspecsviewer.infoquery.utils;
 
+import oshi.util.tuples.Pair;
+
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class ReflectionHelpers {
-    public static List<String> getFieldsAsStringList(Object target) {
-        List<String> fieldNames;
+    public static List<String> getFieldsAsList(Object target) {
+        List<Pair<String, String>> nameValueFields;
+        List<String> resList = new ArrayList<>();
 
         try {
-            fieldNames = ReflectionHelpers.getInfoFieldNames(target);
+            nameValueFields = ReflectionHelpers.getInfoFieldPairs(target);
         } catch (IllegalAccessException e) {
             return Collections.emptyList();
         }
 
-        return fieldNames;
-    }
+        for(Pair<String, String> fieldPair: nameValueFields) {
+            String name = fieldPair.getA();
+            String value = fieldPair.getB();
+            String field = String.format("%s: %s", name, value);
 
-    public static List<String> getInfoFieldNames(Object target) throws IllegalAccessException {
-        Field[] targetFields = target.getClass().getDeclaredFields();
-        List<String> strFields = new ArrayList<>();
-
-        for(Field field: targetFields) {
-            StringBuilder fieldInfo = new StringBuilder(field.getName());
-            fieldInfo.append(": ");
-            fieldInfo.append(field.get(target));
-
-            strFields.add(fieldInfo.toString());
+            resList.add(field);
         }
 
-        return strFields;
+        return resList;
+    }
+
+    public static Map<String, String> getFieldsAsMap(Object target) {
+        List<Pair<String, String>> nameValueFields;
+        Map<String, String> resMap = new HashMap<>();
+
+        try {
+            nameValueFields = ReflectionHelpers.getInfoFieldPairs(target);
+        } catch (IllegalAccessException e) {
+            return Collections.emptyMap();
+        }
+
+        for(Pair<String, String> fieldPair: nameValueFields) {
+            String name = fieldPair.getA();
+            String value = fieldPair.getB();
+
+            resMap.put(name, value);
+        }
+
+        return resMap;
+    }
+
+    private static List<Pair<String, String>> getInfoFieldPairs(Object target) throws IllegalAccessException {
+        Field[] targetFields = target.getClass().getDeclaredFields();
+        List<Pair<String, String>> nameValueFields = new ArrayList<>();
+
+        for(Field field: targetFields) {
+            String fieldName = StringHelpers.transformFieldName(field.getName());
+            String fieldValue = field.get(target).toString();
+
+            nameValueFields.add(new Pair<>(fieldName, fieldValue));
+        }
+
+        return nameValueFields;
     }
 }
