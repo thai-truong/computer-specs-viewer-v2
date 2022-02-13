@@ -1,17 +1,15 @@
 package org.computerspecsviewer.infoquery.cpu;
 
 import org.computerspecsviewer.displaytypes.frequency.Frequency;
-import org.computerspecsviewer.infoquery.utils.ReflectionHelpers;
-import org.computerspecsviewer.infoquery.utils.StringHelpers;
+import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
+import org.computerspecsviewer.infoquery.disk.DiskInfoQuery;
 import oshi.SystemInfo;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.hardware.CentralProcessor;
 
 import org.computerspecsviewer.infoquery.singletons.SystemInfoSingleton;
 
-import java.util.*;
-
-public class CpuInfoQuery {
+public class CpuInfoQuery extends BaseInfoQuery {
     public String name;
     public String vendorName;
     public String familyName;
@@ -44,18 +42,6 @@ public class CpuInfoQuery {
         physicalCoreCount = cpu.getPhysicalProcessorCount();
         interruptCount = cpu.getInterrupts();
         contextSwitchCount = cpu.getContextSwitches();
-    }
-
-    public List<String> getFields() {
-        return ReflectionHelpers.getFieldsAsList(this);
-    }
-
-    public Map<String, String> getFieldsAsMap() { return ReflectionHelpers.getFieldsAsMap(this); }
-
-    @Override
-    public String toString() {
-        List<String> fields = getFields();
-        return StringHelpers.reduceStrList(fields);
     }
 
     public static void main(String[] args) {

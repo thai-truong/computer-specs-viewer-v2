@@ -14,25 +14,25 @@ public class Frequency {
         freqUnitToExp.put(FreqUnits.GHz, 9);
     }
 
-    public long valueAtHz;
+    public long valueInHz;
     public double convVal;
-    public String convUnit;
+    public FreqUnits convUnit;
 
     public Frequency(long valueAtHz) {
         this(valueAtHz, FreqUnits.MHz);
     }
 
-    public Frequency(long valueAtHz, FreqUnits unit) {
-        this.valueAtHz = valueAtHz;
-        this.convVal = valueAtHz / Math.pow(10, freqUnitToExp.get(unit));
-        this.convUnit = unit.getFreqUnit();
+    public Frequency(long valueInHz, FreqUnits unit) {
+        this.valueInHz = valueInHz;
+        this.convVal = valueInHz / Math.pow(10, freqUnitToExp.get(unit));
+        this.convUnit = unit;
     }
 
     @Override
     public String toString() {
         double val = this.convVal;
-        String unit = this.convUnit;
+        FreqUnits unit = this.convUnit;
 
-        return String.format("%.2f %s", val, unit);
+        return String.format("%.2f %s", val, unit.getFreqUnit());
     }
 }
