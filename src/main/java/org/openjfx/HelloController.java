@@ -1,4 +1,4 @@
-package com.example.computerspecsviewer;
+package org.openjfx;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

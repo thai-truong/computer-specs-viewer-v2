@@ -24,8 +24,8 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainModule = 'com.example.computerspecsviewer'
-    mainClass = 'com.example.computerspecsviewer.HelloApplication'
+    mainModule = 'org.openjfx'
+    mainClass = 'org.openjfx.HelloApplication'
 }
 
 javafx {
