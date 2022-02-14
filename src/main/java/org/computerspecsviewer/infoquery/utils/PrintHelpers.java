@@ -1,5 +1,6 @@
 package org.computerspecsviewer.infoquery.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PrintHelpers {
@@ -28,5 +29,15 @@ public class PrintHelpers {
         }
 
         return tabbedStr.toString();
+    }
+
+    public static List<String> injectNewlines(List<String> target) {
+        List<String> newLinedTarget = new ArrayList<>();
+
+        for(String targetStr: target) {
+            newLinedTarget.add(targetStr + "\n");
+        }
+
+        return newLinedTarget;
     }
 }

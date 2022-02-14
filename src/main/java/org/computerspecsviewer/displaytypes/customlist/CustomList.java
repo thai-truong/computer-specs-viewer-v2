@@ -36,32 +36,36 @@ public class CustomList<T> {
             end = PrintHelpers.injectTabs("]", tabCount);
         }
 
-        prettyPrintedList.append(start);
+        if(targetList.isEmpty()) {
+            prettyPrintedList.append("[]");
+        } else {
+            prettyPrintedList.append(start);
 
-        for(int i = 0; i < targetList.size(); i++) {
-            T elem = targetList.get(i);
+            for(int i = 0; i < targetList.size(); i++) {
+                T elem = targetList.get(i);
 
-            String titleStart = String.format("%s %d: {\n", elemTitle, index);
-            String titleEnd = "}";
+                String titleStart = String.format("%s %d: {\n", elemTitle, index);
+                String titleEnd = "}";
 
-            if(i == targetList.size() - 1) {
-                titleEnd += "\n";
-            } else {
-                titleEnd += ",\n";
+                if(i == targetList.size() - 1) {
+                    titleEnd += "\n";
+                } else {
+                    titleEnd += ",\n";
+                }
+
+                String tabbedStart = PrintHelpers.injectTabs(titleStart, titleTabCount);
+                String tabbedEnd = PrintHelpers.injectTabs(titleEnd, titleTabCount);
+                String tabbedElem = PrintHelpers.injectTabs(elem.toString(), elemTabbing);
+
+                prettyPrintedList.append(tabbedStart);
+                prettyPrintedList.append(tabbedElem);
+                prettyPrintedList.append(tabbedEnd);
+
+                index++;
             }
 
-            String tabbedStart = PrintHelpers.injectTabs(titleStart, titleTabCount);
-            String tabbedEnd = PrintHelpers.injectTabs(titleEnd, titleTabCount);
-            String tabbedElem = PrintHelpers.injectTabs(elem.toString(), elemTabbing);
-
-            prettyPrintedList.append(tabbedStart);
-            prettyPrintedList.append(tabbedElem);
-            prettyPrintedList.append(tabbedEnd);
-
-            index++;
+            prettyPrintedList.append(end);
         }
-
-        prettyPrintedList.append(end);
 
         return prettyPrintedList.toString();
     }

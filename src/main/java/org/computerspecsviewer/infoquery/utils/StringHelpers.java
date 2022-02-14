@@ -17,6 +17,10 @@ public class StringHelpers {
         StringBuilder transformed = new StringBuilder();
         int nameLen = name.length();
 
+        if(isAllUppercase(name)) {
+            return name;
+        }
+
         if(nameLen > 0) {
             transformed.append(Character.toUpperCase(name.charAt(0)));
         }
@@ -74,5 +78,17 @@ public class StringHelpers {
 
     private static boolean shouldSpaceOut(char c) {
         return Character.isUpperCase(c);
+    }
+
+    private static boolean isAllUppercase(String target) {
+        for(int i = 0; i < target.length(); i++) {
+            char c = target.charAt(i);
+
+            if(!Character.isUpperCase(c)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
