@@ -13,11 +13,11 @@ public class VirtualMemoryInfo extends BaseInfoQuery {
     public long swapOutPageCount;
 
     public VirtualMemoryInfo(VirtualMemory vMem) {
-        this.virtualMemoryUsedSize = new Space(vMem.getVirtualInUse());
-        this.virtualMemoryTotalSize = new Space(vMem.getVirtualMax());
-        this.swapFileUsedSize = new Space(vMem.getSwapUsed());
-        this.swapFileTotalSize = new Space(vMem.getSwapTotal());
-        this.swapInPageCount = vMem.getSwapPagesIn();
-        this.swapOutPageCount = vMem.getSwapPagesOut();
+        virtualMemoryUsedSize = new Space(vMem.getVirtualInUse());
+        virtualMemoryTotalSize = new Space(vMem.getVirtualMax());
+        swapFileUsedSize = new Space(vMem.getSwapUsed());
+        swapFileTotalSize = new Space(vMem.getSwapTotal());
+        swapInPageCount = vMem.getSwapPagesIn();
+        swapOutPageCount = vMem.getSwapPagesOut();
     }
 }

@@ -13,10 +13,10 @@ public class PhysicalMemoryInfo extends BaseInfoQuery {
     public Frequency clockSpeed;
 
     public PhysicalMemoryInfo(PhysicalMemory pMem) {
-        this.memoryBankLabel = pMem.getBankLabel();
-        this.type = pMem.getMemoryType();
-        this.manufacturer = pMem.getManufacturer();
-        this.memoryBankCapacity = new Space(pMem.getCapacity());
-        this.clockSpeed = new Frequency(pMem.getClockSpeed());
+        memoryBankLabel = pMem.getBankLabel();
+        type = pMem.getMemoryType();
+        manufacturer = pMem.getManufacturer();
+        memoryBankCapacity = new Space(pMem.getCapacity());
+        clockSpeed = new Frequency(pMem.getClockSpeed());
     }
 }
