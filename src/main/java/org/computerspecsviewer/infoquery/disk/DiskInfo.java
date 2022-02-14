@@ -37,6 +37,6 @@ public class DiskInfo extends BaseInfoQuery {
             partitions.add(new DiskPartition(partition));
         }
 
-        customPartitions = new CustomList<>(partitions, "Disk Partition", true, 0);
+        customPartitions = new CustomList<>(partitions, "Disk Partition", true);
     }
 }

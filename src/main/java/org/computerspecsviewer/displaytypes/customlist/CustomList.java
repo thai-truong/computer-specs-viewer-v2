@@ -6,14 +6,18 @@ import java.util.List;
 
 public class CustomList<T> {
     public List<T> targetList;
-    public String elemName;
+    public String elemTitle;
     public int index;
     public boolean printBrackets;
     public int tabCount;
 
-    public CustomList(List<T> targetList, String elemName, boolean printBrackets, int tabCount) {
+    public CustomList(List<T> targetList, String elemTitle, boolean printBrackets) {
+        this(targetList, elemTitle, printBrackets, 0);
+    }
+
+    public CustomList(List<T> targetList, String elemTitle, boolean printBrackets, int tabCount) {
         this.targetList = targetList;
-        this.elemName = elemName;
+        this.elemTitle = elemTitle;
         this.index = 1;
         this.printBrackets = printBrackets;
         this.tabCount = tabCount;
@@ -37,7 +41,7 @@ public class CustomList<T> {
         for(int i = 0; i < targetList.size(); i++) {
             T elem = targetList.get(i);
 
-            String titleStart = String.format("%s %d: {\n", elemName, index);
+            String titleStart = String.format("%s %d: {\n", elemTitle, index);
             String titleEnd = "}";
 
             if(i == targetList.size() - 1) {
