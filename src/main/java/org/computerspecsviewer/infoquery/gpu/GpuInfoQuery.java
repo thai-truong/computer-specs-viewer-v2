@@ -25,7 +25,7 @@ public class GpuInfoQuery extends BaseInfoQuery {
             gcInfoList.add(new GpuInfo(gc));
         }
 
-        customGpusInfo = new CustomList<>(gcInfoList, "Graphics Card", false, 0);
+        customGpusInfo = new CustomList<>(gcInfoList, "Graphics Card", false);
     }
 
     @Override
