@@ -12,11 +12,11 @@ public class GpuInfo extends BaseInfoQuery {
     public Space videoRamAvailable;
 
     public GpuInfo(GraphicsCard gc) {
-        this.deviceId = gc.getDeviceId();
-        this.name = gc.getName();
-        this.vendor = gc.getVendor();
-        this.versionInfo = GpuInfo.processVersionInfo(gc.getVersionInfo());
-        this.videoRamAvailable = new Space(gc.getVRam());
+        deviceId = gc.getDeviceId();
+        name = gc.getName();
+        vendor = gc.getVendor();
+        versionInfo = GpuInfo.processVersionInfo(gc.getVersionInfo());
+        videoRamAvailable = new Space(gc.getVRam());
     }
 
     private static String processVersionInfo(String vInfo) {

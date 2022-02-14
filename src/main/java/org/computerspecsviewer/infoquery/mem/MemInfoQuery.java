@@ -27,9 +27,9 @@ public class MemInfoQuery extends BaseInfoQuery {
         HardwareAbstractionLayer hal = sysInfo.getHardware();
         GlobalMemory mem = hal.getMemory();
 
-        this.availablePhysicalMemory = new Space(mem.getAvailable());
-        this.totalPhysicalMemory = new Space(mem.getTotal());
-        this.pageSize = new Space(mem.getPageSize());
+        availablePhysicalMemory = new Space(mem.getAvailable());
+        totalPhysicalMemory = new Space(mem.getTotal());
+        pageSize = new Space(mem.getPageSize());
 
         VirtualMemory vMem = mem.getVirtualMemory();
         virtualMemoryInfo = new CustomSingleton<>(new VirtualMemoryInfo(vMem));
