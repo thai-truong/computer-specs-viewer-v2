@@ -27,6 +27,7 @@ public class DiskInfoQuery extends BaseInfoQuery {
         customDisksInfo = new CustomList<>(disksInfo, "Disk", false);
     }
 
+    @Override
     public String toString() {
         return customDisksInfo.toString();
     }
