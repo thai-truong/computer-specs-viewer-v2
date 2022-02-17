@@ -1,4 +1,4 @@
-package org.computerspecsviewer.infoquery.network;
+package org.computerspecsviewer.infoquery.networkinterface;
 
 import org.computerspecsviewer.displaytypes.customlist.CustomList;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
