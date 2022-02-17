@@ -3,6 +3,7 @@ package org.computerspecsviewer.infoquery.os;
 import org.computerspecsviewer.displaytypes.bitness.Bitness;
 import org.computerspecsviewer.displaytypes.customdatetime.CustomDateTime;
 import org.computerspecsviewer.displaytypes.customduration.CustomDuration;
+import org.computerspecsviewer.displaytypes.customnumber.CustomNumber;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 import org.computerspecsviewer.infoquery.singletons.SystemInfoSingleton;
 import oshi.SystemInfo;
@@ -16,8 +17,8 @@ public class OsInfoQuery extends BaseInfoQuery {
     public String manufacturer;
     public String buildNumber;
     public String codeName;
-    public int processCount;
-    public int threadCount;
+    public CustomNumber processCount;
+    public CustomNumber threadCount;
     public CustomDateTime bootTime;
     public CustomDuration upTimeSinceBoot;
 
@@ -37,8 +38,8 @@ public class OsInfoQuery extends BaseInfoQuery {
         manufacturer = osManufacturer;
         buildNumber = osVerInfo.getBuildNumber();
         codeName = osVerInfo.getCodeName();
-        processCount = os.getProcessCount();
-        threadCount = os.getThreadCount();
+        processCount = new CustomNumber(os.getProcessCount(), "processes");
+        threadCount = new CustomNumber(os.getThreadCount(), "threads");
         bootTime = new CustomDateTime(os.getSystemBootTime());
         upTimeSinceBoot = new CustomDuration(os.getSystemUptime());
     }

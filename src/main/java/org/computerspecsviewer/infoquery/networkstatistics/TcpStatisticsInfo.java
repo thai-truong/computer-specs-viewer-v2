@@ -1,30 +1,34 @@
 package org.computerspecsviewer.infoquery.networkstatistics;
 
+import org.computerspecsviewer.displaytypes.customnumber.CustomNumber;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 import oshi.software.os.InternetProtocolStats;
 
 public class TcpStatisticsInfo extends BaseInfoQuery {
-    public long establishedConnections;
-    public long activeConnections;
-    public long failedConnections;
-    public long passiveConnections;
-    public long resetConnections;
-    public long segmentsReceived;
-    public long segmentsSent;
-    public long segmentsRetransmitted;
-    public long errorsReceived;
-    public long segmentsTransmittedWithReset;
+    public CustomNumber establishedConnections;
+    public CustomNumber activeConnections;
+    public CustomNumber failedConnections;
+    public CustomNumber passiveConnections;
+    public CustomNumber resetConnections;
+    public CustomNumber segmentsReceived;
+    public CustomNumber segmentsSent;
+    public CustomNumber segmentsRetransmitted;
+    public CustomNumber errorsReceived;
+    public CustomNumber segmentsTransmittedWithReset;
 
     public TcpStatisticsInfo(InternetProtocolStats.TcpStats tcpStats) {
-        establishedConnections = tcpStats.getConnectionsEstablished();
-        activeConnections = tcpStats.getConnectionsActive();
-        failedConnections = tcpStats.getConnectionFailures();
-        passiveConnections = tcpStats.getConnectionsPassive();
-        resetConnections = tcpStats.getConnectionsReset();
-        segmentsReceived = tcpStats.getSegmentsReceived();
-        segmentsSent = tcpStats.getSegmentsSent();
-        segmentsRetransmitted = tcpStats.getSegmentsRetransmitted();
-        errorsReceived = tcpStats.getInErrors();
-        segmentsTransmittedWithReset = tcpStats.getOutResets();
+        final String CONNECTIONS = "connections";
+        final String SEGMENTS = "segments";
+
+        establishedConnections = new CustomNumber(tcpStats.getConnectionsEstablished(), CONNECTIONS);
+        activeConnections = new CustomNumber(tcpStats.getConnectionsActive(), CONNECTIONS);
+        failedConnections = new CustomNumber(tcpStats.getConnectionFailures(), CONNECTIONS);
+        passiveConnections = new CustomNumber(tcpStats.getConnectionsPassive(), CONNECTIONS);
+        resetConnections = new CustomNumber(tcpStats.getConnectionsReset(), CONNECTIONS);
+        segmentsReceived = new CustomNumber(tcpStats.getSegmentsReceived(), SEGMENTS);
+        segmentsSent = new CustomNumber(tcpStats.getSegmentsSent(), SEGMENTS);
+        segmentsRetransmitted = new CustomNumber(tcpStats.getSegmentsRetransmitted(), SEGMENTS);
+        errorsReceived = new CustomNumber(tcpStats.getInErrors(), SEGMENTS);
+        segmentsTransmittedWithReset = new CustomNumber(tcpStats.getOutResets(), SEGMENTS);
     }
 }
