@@ -1,11 +1,10 @@
-package org.computerspecsviewer.infoquery.network;
+package org.computerspecsviewer.infoquery.networkinterface;
 
 import org.computerspecsviewer.displaytypes.customlist.CustomList;
 import org.computerspecsviewer.displaytypes.space.Space;
 import org.computerspecsviewer.displaytypes.space.SpaceUnits;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 import org.computerspecsviewer.infoquery.utils.PrintHelpers;
-import org.computerspecsviewer.infoquery.utils.StringHelpers;
 import oshi.hardware.NetworkIF;
 
 import java.util.Arrays;

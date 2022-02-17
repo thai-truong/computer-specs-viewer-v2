@@ -8,11 +8,6 @@ import org.computerspecsviewer.infoquery.singletons.SystemInfoSingleton;
 import oshi.SystemInfo;
 import oshi.software.os.OperatingSystem;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-
 public class OsInfoQuery extends BaseInfoQuery {
     public String fullName;
     public Bitness bitness;
