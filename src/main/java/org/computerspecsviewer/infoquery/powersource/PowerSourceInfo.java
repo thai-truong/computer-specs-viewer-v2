@@ -4,6 +4,7 @@ import org.computerspecsviewer.displaytypes.customboolean.CustomBoolean;
 import org.computerspecsviewer.displaytypes.customduration.CustomDuration;
 import org.computerspecsviewer.displaytypes.customduration.DurationLimit;
 import org.computerspecsviewer.displaytypes.customfield.CustomField;
+import org.computerspecsviewer.displaytypes.customnumber.CustomNumber;
 import org.computerspecsviewer.displaytypes.percent.Percent;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 import oshi.hardware.PowerSource;
@@ -27,7 +28,7 @@ public class PowerSourceInfo extends BaseInfoQuery {
     public CustomField<Integer> currentCapacity;
     public CustomField<Integer> maximumCapacity;
     public CustomField<Integer> designCapacity;
-    public int cycleCount;
+    public CustomNumber cycleCount;
 
     public PowerSourceInfo(PowerSource powerSource) {
         String capacityUnit = powerSource.getCapacityUnits().toString();
@@ -47,7 +48,7 @@ public class PowerSourceInfo extends BaseInfoQuery {
         currentCapacity = new CustomField<>(powerSource.getCurrentCapacity(), capacityUnit);
         maximumCapacity = new CustomField<>(powerSource.getMaxCapacity(), capacityUnit);
         designCapacity = new CustomField<>(powerSource.getDesignCapacity(), capacityUnit);
-        cycleCount = powerSource.getCycleCount();
+        cycleCount = new CustomNumber(powerSource.getCycleCount(), "cycles");
 
         long estRemTime = (long)powerSource.getTimeRemainingEstimated();
         estimatedTimeRemaining = new CustomDuration(estRemTime, DurationLimit.UP_TO_HOURS);

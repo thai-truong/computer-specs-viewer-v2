@@ -1,18 +1,21 @@
 package org.computerspecsviewer.infoquery.networkstatistics;
 
+import org.computerspecsviewer.displaytypes.customnumber.CustomNumber;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 import oshi.software.os.InternetProtocolStats;
 
 public class UdpStatisticsInfo extends BaseInfoQuery {
-    public long datagramsReceived;
-    public long datagramsSent;
-    public long datagramsReceivedWithNoPort;
-    public long datagramsReceivedErrors;
+    public CustomNumber datagramsReceived;
+    public CustomNumber datagramsSent;
+    public CustomNumber datagramsReceivedWithNoPort;
+    public CustomNumber datagramsReceivedErrors;
 
     public UdpStatisticsInfo(InternetProtocolStats.UdpStats udpStats) {
-        datagramsReceived = udpStats.getDatagramsReceived();
-        datagramsSent = udpStats.getDatagramsSent();
-        datagramsReceivedWithNoPort = udpStats.getDatagramsNoPort();
-        datagramsReceivedErrors = udpStats.getDatagramsReceivedErrors();
+        final String DATAGRAMS = "datagrams";
+
+        datagramsReceived = new CustomNumber(udpStats.getDatagramsReceived(), DATAGRAMS);
+        datagramsSent = new CustomNumber(udpStats.getDatagramsSent(), DATAGRAMS);
+        datagramsReceivedWithNoPort = new CustomNumber(udpStats.getDatagramsNoPort(), DATAGRAMS);
+        datagramsReceivedErrors = new CustomNumber(udpStats.getDatagramsReceivedErrors(), DATAGRAMS);
     }
 }

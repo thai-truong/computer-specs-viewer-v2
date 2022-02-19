@@ -1,6 +1,8 @@
 package org.computerspecsviewer.infoquery.networkinterface;
 
+import org.computerspecsviewer.displaytypes.customfield.CustomField;
 import org.computerspecsviewer.displaytypes.customlist.CustomList;
+import org.computerspecsviewer.displaytypes.customnumber.CustomNumber;
 import org.computerspecsviewer.displaytypes.space.Space;
 import org.computerspecsviewer.displaytypes.space.SpaceUnits;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
@@ -22,17 +24,21 @@ public class NetworkInterfaceInfo extends BaseInfoQuery {
     public CustomList<String> ipV6Addresses;
     public String macAddress;
     public Space mtu;
-    public long speed;
+    public CustomField<Long> speed;
     public Space bytesReceived;
     public Space bytesSent;
-    public long packetsReceived;
-    public long packetsSent;
-    public long receivedDropCount;
-    public long sentDropCount;
-    public long inputErrorCount;
-    public long outputErrorCount;
+    public CustomNumber packetsReceived;
+    public CustomNumber packetsSent;
+    public CustomNumber receivedDropCount;
+    public CustomNumber sentDropCount;
+    public CustomNumber inputErrorCount;
+    public CustomNumber outputErrorCount;
 
     public NetworkInterfaceInfo(NetworkIF nwIf) {
+        final String PACKETS = "packets";
+        final String DROPS = "drops";
+        final String ERRORS = "errors";
+
         index = nwIf.getIndex();
         name = nwIf.getName();
         alias = nwIf.getIfAlias();
@@ -40,15 +46,15 @@ public class NetworkInterfaceInfo extends BaseInfoQuery {
         interfaceType = nwIf.getIfType();
         macAddress = nwIf.getMacaddr();
         mtu = new Space(nwIf.getMTU(), SpaceUnits.MB);
-        speed = nwIf.getSpeed();
+        speed = new CustomField<>(nwIf.getSpeed(), "bit/sec");
         bytesReceived = new Space(nwIf.getBytesRecv(), SpaceUnits.MB);
         bytesSent = new Space(nwIf.getBytesSent(), SpaceUnits.MB);
-        packetsReceived = nwIf.getPacketsRecv();
-        packetsSent = nwIf.getPacketsSent();
-        receivedDropCount = nwIf.getInDrops();
-        sentDropCount = nwIf.getCollisions();
-        inputErrorCount = nwIf.getInErrors();
-        outputErrorCount = nwIf.getOutErrors();
+        packetsReceived = new CustomNumber(nwIf.getPacketsRecv(), PACKETS);
+        packetsSent = new CustomNumber(nwIf.getPacketsSent(), PACKETS);
+        receivedDropCount = new CustomNumber(nwIf.getInDrops(), DROPS);
+        sentDropCount = new CustomNumber(nwIf.getCollisions(), DROPS);
+        inputErrorCount = new CustomNumber(nwIf.getInErrors(), ERRORS);
+        outputErrorCount = new CustomNumber(nwIf.getOutErrors(), ERRORS);
 
         List<String> ipV4AddrList = Arrays.asList(nwIf.getIPv4addr());
         ipV4AddrList = PrintHelpers.injectNewlines(ipV4AddrList);
