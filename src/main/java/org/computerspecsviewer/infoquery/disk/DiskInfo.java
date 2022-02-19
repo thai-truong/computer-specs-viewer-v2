@@ -1,6 +1,7 @@
 package org.computerspecsviewer.infoquery.disk;
 
 import org.computerspecsviewer.displaytypes.customlist.CustomList;
+import org.computerspecsviewer.displaytypes.customnumber.CustomNumber;
 import org.computerspecsviewer.displaytypes.space.Space;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 import oshi.hardware.HWDiskStore;
@@ -13,9 +14,9 @@ public class DiskInfo extends BaseInfoQuery {
     public String name;
     public String modelName;
     public String serialNumber;
-    public long readCount;
+    public CustomNumber readCount;
     public Space readBytes;
-    public long writeCount;
+    public CustomNumber writeCount;
     public Space writeBytes;
     public Space size;
     public CustomList<DiskPartition> customPartitions;
@@ -24,9 +25,9 @@ public class DiskInfo extends BaseInfoQuery {
         name = disk.getName();
         modelName = disk.getModel();
         serialNumber = disk.getSerial();
-        readCount = disk.getReads();
+        readCount = new CustomNumber(disk.getReads(), "reads");
         readBytes = new Space(disk.getReadBytes());
-        writeCount = disk.getWrites();
+        writeCount = new CustomNumber(disk.getWrites(), "writes");
         writeBytes = new Space(disk.getWriteBytes());
         size = new Space(disk.getSize());
 

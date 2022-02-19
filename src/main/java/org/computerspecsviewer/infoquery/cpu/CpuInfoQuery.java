@@ -1,5 +1,6 @@
 package org.computerspecsviewer.infoquery.cpu;
 
+import org.computerspecsviewer.displaytypes.customnumber.CustomNumber;
 import org.computerspecsviewer.displaytypes.frequency.Frequency;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 import org.computerspecsviewer.infoquery.disk.DiskInfoQuery;
@@ -19,8 +20,8 @@ public class CpuInfoQuery extends BaseInfoQuery {
     public Frequency maxFrequency;
     public int logicalCoreCount;
     public int physicalCoreCount;
-    public long interruptCount;
-    public long contextSwitchCount;
+    public CustomNumber interruptCount;
+    public CustomNumber contextSwitchCount;
 
     public CpuInfoQuery() {
         SystemInfo sysInfo = SystemInfoSingleton.getInstance();
@@ -40,8 +41,8 @@ public class CpuInfoQuery extends BaseInfoQuery {
 
         logicalCoreCount = cpu.getLogicalProcessorCount();
         physicalCoreCount = cpu.getPhysicalProcessorCount();
-        interruptCount = cpu.getInterrupts();
-        contextSwitchCount = cpu.getContextSwitches();
+        interruptCount = new CustomNumber(cpu.getInterrupts(), "interrupts");
+        contextSwitchCount = new CustomNumber(cpu.getContextSwitches(), "context switches");
     }
 
     public static void main(String[] args) {
