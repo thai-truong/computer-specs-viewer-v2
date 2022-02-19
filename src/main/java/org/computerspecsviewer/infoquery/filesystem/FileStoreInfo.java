@@ -14,6 +14,7 @@ public class FileStoreInfo extends BaseInfoQuery {
     public String type;
     public String description;
     public String mountpoint;
+    public String options;
     public Space totalSpace;
     public CustomPair<Space, String> freeSpace;
     public CustomPair<Space, String> usedSpace;
@@ -37,6 +38,7 @@ public class FileStoreInfo extends BaseInfoQuery {
         type = osFileStore.getType();
         description = osFileStore.getDescription();
         mountpoint = osFileStore.getMount();
+        options = "[" + osFileStore.getOptions() + "]";
         totalSpace = new Space(fsTotalSpace);
         freeSpace = new CustomPair<>(new Space(fsFreeSpace), getExtraPercentInfo(fsFreeSpace, fsTotalSpace));
         usedSpace = new CustomPair<>(new Space(fsUsedSpace), getExtraPercentInfo(fsUsedSpace, fsTotalSpace));
