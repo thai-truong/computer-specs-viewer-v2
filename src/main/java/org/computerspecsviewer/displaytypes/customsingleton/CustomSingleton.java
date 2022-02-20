@@ -19,7 +19,7 @@ public class CustomSingleton<T> {
     public String toString() {
         StringBuilder prettyPrintedObj = new StringBuilder();
 
-        String start = " {\n";
+        String start = "{\n";
         String end = "}";
         String tabbedObj = PrintHelpers.injectTabs(target.toString(), tabCount);
 
