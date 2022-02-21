@@ -1,11 +1,7 @@
 package org.computerspecsviewer.infoquery.usbdevice;
 
-import org.computerspecsviewer.displaytypes.customlist.CustomList;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 import oshi.hardware.UsbDevice;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class UsbDeviceInfo extends BaseInfoQuery {
     public String name;

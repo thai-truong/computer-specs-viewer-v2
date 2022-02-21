@@ -19,6 +19,9 @@ public class GpuInfo extends BaseInfoQuery {
         videoRamAvailable = new Space(gc.getVRam());
     }
 
+    // The GPU version info collected by Oshi (at least for Windows) is of the format "DriverVersion=<version>".
+    // Only <version> is desirable and hence the code below gets rid of the "DriverVersion=" if it does exist, or
+    // any version string containing "=".
     private static String processVersionInfo(String vInfo) {
         if(vInfo.contains("=")) {
             return vInfo.substring(vInfo.indexOf('=') + 1);

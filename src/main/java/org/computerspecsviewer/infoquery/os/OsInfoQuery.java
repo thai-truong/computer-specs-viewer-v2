@@ -1,17 +1,17 @@
 package org.computerspecsviewer.infoquery.os;
 
-import org.computerspecsviewer.displaytypes.bitness.Bitness;
 import org.computerspecsviewer.displaytypes.customdatetime.CustomDateTime;
 import org.computerspecsviewer.displaytypes.customduration.CustomDuration;
 import org.computerspecsviewer.displaytypes.customnumber.CustomNumber;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 import org.computerspecsviewer.infoquery.singletons.SystemInfoSingleton;
+import org.computerspecsviewer.infoquery.utils.PrintHelpers;
 import oshi.SystemInfo;
 import oshi.software.os.OperatingSystem;
 
 public class OsInfoQuery extends BaseInfoQuery {
     public String fullName;
-    public Bitness bitness;
+    public String bitness;
     public String family;
     public String version;
     public String manufacturer;
@@ -29,7 +29,7 @@ public class OsInfoQuery extends BaseInfoQuery {
 
         String osFamily = os.getFamily();
         String osManufacturer = os.getManufacturer();
-        Bitness osBitness = new Bitness(os.getBitness());
+        String osBitness = PrintHelpers.getBitnessString(os.getBitness());
 
         fullName = getPlatformName(osManufacturer, osFamily) + getVersionInfoStr(osVerInfo, osBitness);
         bitness = osBitness;
@@ -48,7 +48,7 @@ public class OsInfoQuery extends BaseInfoQuery {
         return manufacturer + " " + family;
     }
 
-    public static String getVersionInfoStr(OperatingSystem.OSVersionInfo verInfo, Bitness bitness) {
+    public static String getVersionInfoStr(OperatingSystem.OSVersionInfo verInfo, String bitness) {
         String version = verInfo.getVersion();
         String codeName = verInfo.getCodeName();
         String buildNum = verInfo.getBuildNumber();
@@ -65,7 +65,7 @@ public class OsInfoQuery extends BaseInfoQuery {
             buildNum = "Build " + buildNum + " ";
         }
 
-        return version + codeName + buildNum + bitness.toString();
+        return version + codeName + buildNum + bitness;
     }
 
     public static void main(String[] args) {

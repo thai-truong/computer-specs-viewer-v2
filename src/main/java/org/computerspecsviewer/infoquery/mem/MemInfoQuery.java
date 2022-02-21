@@ -21,7 +21,6 @@ public class MemInfoQuery extends BaseInfoQuery {
     public CustomSingleton<VirtualMemoryInfo> virtualMemoryInfo;
     public CustomList<PhysicalMemoryInfo> physicalMemoryDevices;
 
-
     public MemInfoQuery() {
         SystemInfo sysInfo = SystemInfoSingleton.getInstance();
         HardwareAbstractionLayer hal = sysInfo.getHardware();

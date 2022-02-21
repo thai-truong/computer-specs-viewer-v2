@@ -5,11 +5,9 @@ import org.computerspecsviewer.displaytypes.customduration.CustomDuration;
 import org.computerspecsviewer.displaytypes.customduration.DurationLimit;
 import org.computerspecsviewer.displaytypes.customfield.CustomField;
 import org.computerspecsviewer.displaytypes.customnumber.CustomNumber;
-import org.computerspecsviewer.displaytypes.percent.Percent;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
+import org.computerspecsviewer.infoquery.utils.PrintHelpers;
 import oshi.hardware.PowerSource;
-
-import java.time.LocalDate;
 
 public class PowerSourceInfo extends BaseInfoQuery {
     public String name;
@@ -19,7 +17,7 @@ public class PowerSourceInfo extends BaseInfoQuery {
     public String batteryChemistry;
     public CustomBoolean isCharging;
     public CustomBoolean isPluggedIntoExternalSource;
-    public Percent estimatedRemainingCapacityPercent;
+    public String estimatedRemainingCapacityPercent;
     public CustomDuration estimatedTimeRemaining;
     public CustomField<Double> temperature;
     public CustomField<Double> amperage;
@@ -32,6 +30,7 @@ public class PowerSourceInfo extends BaseInfoQuery {
 
     public PowerSourceInfo(PowerSource powerSource) {
         String capacityUnit = powerSource.getCapacityUnits().toString();
+        double capacityPercent = powerSource.getRemainingCapacityPercent();
 
         name = powerSource.getName();
         deviceName = powerSource.getDeviceName();
@@ -40,7 +39,7 @@ public class PowerSourceInfo extends BaseInfoQuery {
         batteryChemistry = powerSource.getChemistry();
         isCharging = new CustomBoolean(powerSource.isCharging());
         isPluggedIntoExternalSource = new CustomBoolean(powerSource.isPowerOnLine());
-        estimatedRemainingCapacityPercent = new Percent(powerSource.getRemainingCapacityPercent());
+        estimatedRemainingCapacityPercent = PrintHelpers.getPercentString(capacityPercent, 1);
         temperature = new CustomField<>(powerSource.getTemperature(), "degrees Celsius");
         amperage = new CustomField<>(powerSource.getAmperage(), "mA");
         voltage = new CustomField<>(powerSource.getVoltage(), "volts");

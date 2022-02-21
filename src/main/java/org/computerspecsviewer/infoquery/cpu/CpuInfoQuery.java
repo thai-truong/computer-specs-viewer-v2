@@ -1,9 +1,9 @@
 package org.computerspecsviewer.infoquery.cpu;
 
+import org.computerspecsviewer.displaytypes.customboolean.CustomBoolean;
+import org.computerspecsviewer.displaytypes.customfield.CustomField;
 import org.computerspecsviewer.displaytypes.customnumber.CustomNumber;
-import org.computerspecsviewer.displaytypes.frequency.Frequency;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
-import org.computerspecsviewer.infoquery.disk.DiskInfoQuery;
 import oshi.SystemInfo;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.hardware.CentralProcessor;
@@ -16,8 +16,8 @@ public class CpuInfoQuery extends BaseInfoQuery {
     public String familyName;
     public String modelName;
     public String physicalId;
-    public boolean is64bit;
-    public Frequency maxFrequency;
+    public CustomBoolean is64bit;
+    public CustomField<Double> maxFrequency;
     public int logicalCoreCount;
     public int physicalCoreCount;
     public CustomNumber interruptCount;
@@ -36,8 +36,8 @@ public class CpuInfoQuery extends BaseInfoQuery {
         modelName = cpuIdInfo.getModel();
 
         physicalId = cpuIdInfo.getProcessorID();
-        is64bit = cpuIdInfo.isCpu64bit();
-        maxFrequency = new Frequency(cpu.getMaxFreq());
+        is64bit = new CustomBoolean(cpuIdInfo.isCpu64bit());
+        maxFrequency = new CustomField<>(cpu.getMaxFreq() / Math.pow(10, 6), "MHz");
 
         logicalCoreCount = cpu.getLogicalProcessorCount();
         physicalCoreCount = cpu.getPhysicalProcessorCount();

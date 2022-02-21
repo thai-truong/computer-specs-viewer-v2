@@ -17,8 +17,8 @@ public class GpuInfoQuery extends BaseInfoQuery {
     public GpuInfoQuery() {
         SystemInfo sysInfo = SystemInfoSingleton.getInstance();
         HardwareAbstractionLayer hal = sysInfo.getHardware();
-        List<GraphicsCard> gcList = hal.getGraphicsCards();
 
+        List<GraphicsCard> gcList = hal.getGraphicsCards();
         List<GpuInfo> gcInfoList = new ArrayList<>();
 
         for(GraphicsCard gc: gcList) {

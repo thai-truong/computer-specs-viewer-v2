@@ -16,8 +16,8 @@ public class NetworkInfoQuery extends BaseInfoQuery {
     public NetworkInfoQuery() {
         SystemInfo sysInfo = SystemInfoSingleton.getInstance();
         HardwareAbstractionLayer hal = sysInfo.getHardware();
-        List<NetworkIF> nwIfs = hal.getNetworkIFs();
 
+        List<NetworkIF> nwIfs = hal.getNetworkIFs();
         List<NetworkInterfaceInfo> nwIfInfoList = new ArrayList<>();
 
         for(NetworkIF nwIf: nwIfs) {

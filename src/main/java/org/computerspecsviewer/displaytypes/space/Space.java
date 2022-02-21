@@ -1,7 +1,5 @@
 package org.computerspecsviewer.displaytypes.space;
 
-import org.computerspecsviewer.displaytypes.frequency.FreqUnits;
-
 import java.util.HashMap;
 import java.util.Map;
 
