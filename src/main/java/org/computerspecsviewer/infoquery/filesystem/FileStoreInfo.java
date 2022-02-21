@@ -2,9 +2,9 @@ package org.computerspecsviewer.infoquery.filesystem;
 
 import org.computerspecsviewer.displaytypes.customnumber.CustomNumber;
 import org.computerspecsviewer.displaytypes.custompair.CustomPair;
-import org.computerspecsviewer.displaytypes.percent.Percent;
 import org.computerspecsviewer.displaytypes.space.Space;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
+import org.computerspecsviewer.infoquery.utils.PrintHelpers;
 import oshi.software.os.OSFileStore;
 
 public class FileStoreInfo extends BaseInfoQuery {
@@ -48,15 +48,6 @@ public class FileStoreInfo extends BaseInfoQuery {
     }
 
     private String getExtraPercentInfo(long numerator, long denominator) {
-        double decimalValue;
-
-        if(denominator == 0) {
-            decimalValue = 1;
-        } else {
-            decimalValue = (double)numerator / denominator;
-        }
-
-        Percent percent = new Percent(decimalValue);
-        return "(" + percent + ")";
+        return "(" + PrintHelpers.getPercentString(numerator, denominator) + ")";
     }
 }

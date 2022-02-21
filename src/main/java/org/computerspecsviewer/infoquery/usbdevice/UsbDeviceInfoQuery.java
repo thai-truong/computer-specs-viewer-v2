@@ -16,6 +16,7 @@ public class UsbDeviceInfoQuery extends BaseInfoQuery {
     public UsbDeviceInfoQuery() {
         SystemInfo sysInfo = SystemInfoSingleton.getInstance();
         HardwareAbstractionLayer hal = sysInfo.getHardware();
+
         List<UsbDevice> usbDeviceList = hal.getUsbDevices(false);
         List<UsbDeviceInfo> usbDeviceInfos = new ArrayList<>();
 

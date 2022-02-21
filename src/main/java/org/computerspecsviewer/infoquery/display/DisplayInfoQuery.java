@@ -6,7 +6,6 @@ import org.computerspecsviewer.infoquery.singletons.SystemInfoSingleton;
 import oshi.SystemInfo;
 import oshi.hardware.Display;
 import oshi.hardware.HardwareAbstractionLayer;
-import oshi.util.EdidUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +16,7 @@ public class DisplayInfoQuery extends BaseInfoQuery {
     public DisplayInfoQuery() {
         SystemInfo sysInfo = SystemInfoSingleton.getInstance();
         HardwareAbstractionLayer hal = sysInfo.getHardware();
+
         List<Display> displayList = hal.getDisplays();
         List<DisplayInfo> displayInfoList = new ArrayList<>();
 

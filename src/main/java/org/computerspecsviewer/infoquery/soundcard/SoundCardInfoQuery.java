@@ -16,6 +16,7 @@ public class SoundCardInfoQuery extends BaseInfoQuery {
     public SoundCardInfoQuery() {
         SystemInfo sysInfo = SystemInfoSingleton.getInstance();
         HardwareAbstractionLayer hal = sysInfo.getHardware();
+
         List<SoundCard> soundCardList = hal.getSoundCards();
         List<SoundCardInfo> soundCardInfoList = new ArrayList<>();
 

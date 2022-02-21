@@ -4,11 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrintHelpers {
+    private static final String TAB = "\t";
+
+    public static String getBitnessString(int bitness) {
+        return String.format("%d-bit", bitness);
+    }
+
+    public static String getPercentString(double numerator, double denominator) {
+        if(denominator == 0) {
+            return "No percentage (denominator is 0)";
+        }
+
+        return String.format("%.2f%%", (numerator / denominator) * 100);
+    }
+
     public static String getTabsFromCount(int tabCount) {
         StringBuilder tabs = new StringBuilder();
 
         for(int i = 0; i < tabCount; i++) {
-            tabs.append("\t");
+            tabs.append(TAB);
         }
 
         return tabs.toString();

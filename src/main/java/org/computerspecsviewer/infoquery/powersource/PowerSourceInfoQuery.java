@@ -16,8 +16,8 @@ public class PowerSourceInfoQuery extends BaseInfoQuery {
     public PowerSourceInfoQuery() {
         SystemInfo sysInfo = SystemInfoSingleton.getInstance();
         HardwareAbstractionLayer hal = sysInfo.getHardware();
-        List<PowerSource> powerSourceList = hal.getPowerSources();
 
+        List<PowerSource> powerSourceList = hal.getPowerSources();
         List<PowerSourceInfo> powerSourceInfoList = new ArrayList<>();
 
         for(PowerSource powerSource: powerSourceList) {
