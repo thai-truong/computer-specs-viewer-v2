@@ -24,7 +24,7 @@ public class SoundCardInfoQuery extends BaseInfoQuery {
             soundCardInfoList.add(new SoundCardInfo(soundCard));
         }
 
-        soundCards = new CustomList<>(soundCardInfoList, "Sound Card", false);
+        soundCards = new CustomList<>(soundCardInfoList, "Sound Card", true);
     }
 
     @Override

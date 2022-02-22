@@ -24,7 +24,7 @@ public class DisplayInfoQuery extends BaseInfoQuery {
             displayInfoList.add(new DisplayInfo(display));
         }
 
-        displayDevices = new CustomList<>(displayInfoList, "Display Device", false);
+        displayDevices = new CustomList<>(displayInfoList, "Display Device", true);
     }
 
     @Override
