@@ -4,6 +4,8 @@ import org.computerspecsviewer.infoquery.controller.InfoQueryController;
 import org.computerspecsviewer.infoquery.utils.PrintHelpers;
 import org.computerspecsviewer.infoquery.utils.StringHelpers;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Runner {
@@ -50,9 +52,11 @@ public class Runner {
     }
 
     private static void printStartingInstructions() {
-        System.out.println("\n- Type one of these choices to view their information: [computerSystem, cpu, disks, " +
-                "memory, graphicsCards, displayDevices, networkInterfaces, powerSources, soundCards, usbDevices, " +
-                "operatingSystem, fileSystem, networkStatistics]");
+        List<String> allInfoTypes = Arrays.asList(InfoQueryController.allInfoTypes);
+        String printedAllInfoTypes = PrintHelpers.injectTabs(PrintHelpers.injectNewlinesInFront(allInfoTypes).toString(), 1);
+
+        System.out.println(String.format("\n- Type one of these choices to view their information: %s",
+                printedAllInfoTypes));
         System.out.println("- To view all types of information, type \"all\"");
         System.out.println("- To quit, type \"q\" or \"quit\"!");
         System.out.println("\nEnter information listed above that you want to see: ");

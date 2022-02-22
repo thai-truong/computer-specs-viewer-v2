@@ -54,4 +54,14 @@ public class PrintHelpers {
 
         return newLinedTarget;
     }
+
+    public static List<String> injectNewlinesInFront(List<String> target) {
+        List<String> newLinedTarget = new ArrayList<>();
+
+        for(String targetStr: target) {
+            newLinedTarget.add("\n" + targetStr);
+        }
+
+        return newLinedTarget;
+    }
 }
