@@ -1,11 +1,7 @@
 package org.computerspecsviewer.cli;
 
 import org.computerspecsviewer.infoquery.controller.InfoQueryController;
-import org.computerspecsviewer.infoquery.utils.PrintHelpers;
-import org.computerspecsviewer.infoquery.utils.StringHelpers;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class Runner {
@@ -16,7 +12,7 @@ public class Runner {
         setUpShutdownHook(inputReader);
 
         while(true) {
-            printStartingInstructions();
+            PrintingHelpers.printStartingInstructions();
             String queryRequest = inputReader.next();
 
             if(foundQuitInput(queryRequest)) {
@@ -24,52 +20,25 @@ public class Runner {
             }
 
             if(iqc.foundInfoType(queryRequest)) {
-                printInfoQuery(iqc, queryRequest);
+                PrintingHelpers.printInfoQuery(iqc, queryRequest);
             } else if(queryRequest.equals("all")) {
                 for(String infoType: InfoQueryController.allInfoTypes) {
-                    printInfoQuery(iqc, infoType);
+                    PrintingHelpers.printInfoQuery(iqc, infoType);
                 }
             } else {
-                printInfoTypeNotFound(queryRequest);
+                PrintingHelpers.printInfoTypeNotFound(queryRequest);
             }
         }
     }
 
     private static void cleanUpRunner(Scanner scanner) {
-        printClosingStatements();
+        PrintingHelpers.printClosingStatements();
         scanner.close();
     }
 
     private static void setUpShutdownHook(Scanner scanner) {
         Thread closingHook = new Thread(() -> cleanUpRunner(scanner));
         Runtime.getRuntime().addShutdownHook(closingHook);
-    }
-
-    private static void printInfoQuery(InfoQueryController iqc, String queryRequest) {
-        System.out.println();
-        System.out.println(StringHelpers.transformFieldName(queryRequest) + " Info:");
-        System.out.println(PrintHelpers.injectTabs(iqc.getInfoQuery(queryRequest).toString(), 1));
-    }
-
-    private static void printStartingInstructions() {
-        List<String> allInfoTypes = Arrays.asList(InfoQueryController.allInfoTypes);
-        String printedAllInfoTypes = PrintHelpers.injectTabs(PrintHelpers.injectNewlinesInFront(allInfoTypes).toString(), 1);
-
-        System.out.println(String.format("\n- Type one of these choices to view their information: %s",
-                printedAllInfoTypes));
-        System.out.println("- To view all types of information, type \"all\"");
-        System.out.println("- To quit, type \"q\" or \"quit\"!");
-        System.out.println("\nEnter information listed above that you want to see: ");
-    }
-
-    private static void printClosingStatements() {
-        System.out.println("\n- Thank you so much for using Computer Specs Viewer CLI!");
-        System.out.println("- Hope you had a great experience.");
-    }
-
-    private static void printInfoTypeNotFound(String invalidInfoType) {
-        System.out.println(String.format("\n- You have inputted an invalid info type of value %s. " +
-                "Please only select the supported info types", invalidInfoType));
     }
 
     private static boolean foundQuitInput(String input) {
