@@ -24,7 +24,7 @@ public class UsbDeviceInfoQuery extends BaseInfoQuery {
             usbDeviceInfos.add(new UsbDeviceInfo(usb));
         }
 
-        usbDevices = new CustomList<>(usbDeviceInfos, "USB Device", false);
+        usbDevices = new CustomList<>(usbDeviceInfos, "USB Device", true);
     }
 
     @Override

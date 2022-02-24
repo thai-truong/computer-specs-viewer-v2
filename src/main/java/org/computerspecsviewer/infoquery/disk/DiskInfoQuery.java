@@ -24,7 +24,7 @@ public class DiskInfoQuery extends BaseInfoQuery {
             disksInfo.add(new DiskInfo(disk));
         }
 
-        customDisksInfo = new CustomList<>(disksInfo, "Disk", false);
+        customDisksInfo = new CustomList<>(disksInfo, "Disk", true);
     }
 
     @Override

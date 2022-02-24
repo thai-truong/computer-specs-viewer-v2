@@ -24,7 +24,7 @@ public class NetworkInfoQuery extends BaseInfoQuery {
             nwIfInfoList.add(new NetworkInterfaceInfo(nwIf));
         }
 
-        networkInterfacesInfo = new CustomList<>(nwIfInfoList, "Network Interface", false);
+        networkInterfacesInfo = new CustomList<>(nwIfInfoList, "Network Interface", true);
     }
 
     @Override

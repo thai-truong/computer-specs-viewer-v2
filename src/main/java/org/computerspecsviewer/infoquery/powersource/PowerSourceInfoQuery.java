@@ -24,7 +24,7 @@ public class PowerSourceInfoQuery extends BaseInfoQuery {
             powerSourceInfoList.add(new PowerSourceInfo(powerSource));
         }
 
-        powerSources = new CustomList<>(powerSourceInfoList, "Power Source", false);
+        powerSources = new CustomList<>(powerSourceInfoList, "Power Source", true);
     }
 
     @Override
