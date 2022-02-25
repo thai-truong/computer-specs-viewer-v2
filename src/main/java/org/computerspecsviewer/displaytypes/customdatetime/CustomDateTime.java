@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 public class CustomDateTime {
-    public LocalDateTime storedDateTime;
+    private LocalDateTime storedDateTime;
 
     public CustomDateTime(long secondsSinceEpoch) {
         Instant bootTimeInstant = Instant.ofEpochSecond(secondsSinceEpoch);

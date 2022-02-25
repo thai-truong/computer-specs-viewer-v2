@@ -11,6 +11,8 @@ public abstract class BaseInfoQuery {
 
     public Map<String, String> getFieldsAsMap() { return ReflectionHelpers.getFieldsAsMap(this); }
 
+    public Map<String, Object> getRawFieldsAsMap() { return ReflectionHelpers.getRawFieldsAsMap(this); }
+
     @Override
     public String toString() {
         List<String> fields = getFields();

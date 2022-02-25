@@ -11,7 +11,7 @@ public class DisplayInfo extends BaseInfoQuery {
     public String productId;
     public String serialNumber;
     public String manufacturerId;
-    public int yearManufactured;
+    public Integer yearManufactured;
     public CustomField<Integer> monitorHeight;
     public CustomField<Integer> monitorWidth;
     public CustomBoolean isDigital;

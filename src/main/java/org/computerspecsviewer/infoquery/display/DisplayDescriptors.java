@@ -1,9 +1,10 @@
 package org.computerspecsviewer.infoquery.display;
 
+import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 import oshi.util.EdidUtil;
 import oshi.util.ParseUtil;
 
-public class DisplayDescriptors {
+public class DisplayDescriptors extends BaseInfoQuery {
     public String descriptorsContent;
 
     public DisplayDescriptors(byte[] edid) {

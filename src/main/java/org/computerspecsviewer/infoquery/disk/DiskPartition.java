@@ -10,8 +10,8 @@ public class DiskPartition extends BaseInfoQuery {
     public String mountPoint;
     public String type;
     public Space size;
-    public int majorId;
-    public int minorId;
+    public Integer majorId;
+    public Integer minorId;
 
     public DiskPartition(HWPartition partition) {
         id = partition.getIdentification();

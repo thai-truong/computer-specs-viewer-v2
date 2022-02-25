@@ -1,9 +1,9 @@
 package org.computerspecsviewer.displaytypes.customboolean;
 
 public class CustomBoolean {
-    public boolean value;
-    public String trueStr;
-    public String falseStr;
+    private boolean value;
+    private String trueStr;
+    private String falseStr;
 
     public CustomBoolean(boolean value) {
         this(value, "Yes", "No");

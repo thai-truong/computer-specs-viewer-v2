@@ -5,11 +5,11 @@ import org.computerspecsviewer.infoquery.utils.PrintHelpers;
 import java.util.List;
 
 public class CustomList<T> {
-    public List<T> targetList;
-    public String elemTitle;
-    public int index;
-    public boolean printBrackets;
-    public int tabCount;
+    private List<T> targetList;
+    private String elemTitle;
+    private int index;
+    private boolean printBrackets;
+    private int tabCount;
 
     public CustomList(List<T> targetList, String elemTitle, boolean printBrackets) {
         this(targetList, elemTitle, printBrackets, 0);
@@ -22,6 +22,12 @@ public class CustomList<T> {
         this.printBrackets = printBrackets;
         this.tabCount = tabCount;
     }
+
+    public List<T> getTargetList() {
+        return targetList;
+    }
+
+    public String getElemTitle() { return elemTitle; }
 
     @Override
     public String toString() {

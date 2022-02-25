@@ -60,4 +60,30 @@ public class ReflectionHelpers {
 
         return nameValueFields;
     }
+
+    public static Map<String, Object> getRawFieldsAsMap(Object target) {
+        Map<String, Object> fieldsMap;
+
+        try {
+            fieldsMap = ReflectionHelpers.getInfoFieldMap(target);
+        } catch (IllegalAccessException e) {
+            return Collections.emptyMap();
+        }
+
+        return fieldsMap;
+    }
+
+    private static Map<String, Object> getInfoFieldMap(Object target) throws IllegalAccessException {
+        Field[] targetFields = target.getClass().getDeclaredFields();
+        Map<String, Object> infoFieldMap = new HashMap<>();
+
+        for(Field field: targetFields) {
+            String fieldName = StringHelpers.transformFieldName(field.getName());
+            Object fieldValue = field.get(target);
+
+            infoFieldMap.put(fieldName, fieldValue);
+        }
+
+        return infoFieldMap;
+    }
 }

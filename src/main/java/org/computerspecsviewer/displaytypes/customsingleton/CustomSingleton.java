@@ -3,8 +3,8 @@ package org.computerspecsviewer.displaytypes.customsingleton;
 import org.computerspecsviewer.infoquery.utils.PrintHelpers;
 
 public class CustomSingleton<T> {
-    public T target;
-    public int tabCount;
+    private T target;
+    private int tabCount;
 
     public CustomSingleton(T target) {
         this(target, 1);
@@ -13,6 +13,10 @@ public class CustomSingleton<T> {
     public CustomSingleton(T target, int tabCount) {
         this.target = target;
         this.tabCount = tabCount;
+    }
+
+    public T getTarget() {
+        return target;
     }
 
     @Override

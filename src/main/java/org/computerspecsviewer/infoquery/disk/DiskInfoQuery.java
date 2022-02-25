@@ -35,5 +35,11 @@ public class DiskInfoQuery extends BaseInfoQuery {
     public static void main(String[] args) {
         DiskInfoQuery test = new DiskInfoQuery();
         System.out.println(test);
+
+        List<String> strTest = new ArrayList<>();
+        strTest.add("hi");
+
+        CustomList<String> testList = new CustomList<>(strTest, "test", false);
+        System.out.println(testList.getClass().getSimpleName());
     }
 }

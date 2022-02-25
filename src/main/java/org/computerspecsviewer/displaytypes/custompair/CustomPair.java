@@ -1,10 +1,10 @@
 package org.computerspecsviewer.displaytypes.custompair;
 
 public class CustomPair<A, B> {
-    public final A objectA;
-    public final B objectB;
-    public boolean printParentheses;
-    public String separator;
+    private final A objectA;
+    private final B objectB;
+    private boolean printParentheses;
+    private String separator;
 
     public CustomPair(A objectA, B objectB) {
         this(objectA, objectB, false, " ");
