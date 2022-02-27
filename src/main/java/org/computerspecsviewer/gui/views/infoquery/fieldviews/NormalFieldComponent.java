@@ -3,6 +3,7 @@ package org.computerspecsviewer.gui.views.infoquery.fieldviews;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class NormalFieldComponent {
 
     private String label;
     private String value;
-    private HBox fieldView;
+    private Pane fieldView;
 
     public NormalFieldComponent(Object value) {
         this("", value);
@@ -24,7 +25,7 @@ public class NormalFieldComponent {
         this.value = value.toString();
     }
 
-    public HBox getFieldView() {
+    public Pane get() {
         if(fieldView == null) {
             createFieldView();
         }

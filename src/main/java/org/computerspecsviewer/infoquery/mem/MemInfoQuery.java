@@ -18,7 +18,7 @@ public class MemInfoQuery extends BaseInfoQuery {
     public Space availablePhysicalMemory;
     public Space totalPhysicalMemory;
     public Space pageSize;
-    public CustomSingleton<VirtualMemoryInfo> virtualMemoryInfo;
+    public CustomSingleton virtualMemoryInfo;
     public CustomList<PhysicalMemoryInfo> physicalMemoryDevices;
 
     public MemInfoQuery() {
@@ -31,7 +31,7 @@ public class MemInfoQuery extends BaseInfoQuery {
         pageSize = new Space(mem.getPageSize());
 
         VirtualMemory vMem = mem.getVirtualMemory();
-        virtualMemoryInfo = new CustomSingleton<>(new VirtualMemoryInfo(vMem));
+        virtualMemoryInfo = new CustomSingleton(new VirtualMemoryInfo(vMem));
 
         List<PhysicalMemory> physMemList = mem.getPhysicalMemory();
         List<PhysicalMemoryInfo> physMemInfoList = new ArrayList<>();

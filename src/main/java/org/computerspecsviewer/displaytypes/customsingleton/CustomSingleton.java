@@ -1,21 +1,22 @@
 package org.computerspecsviewer.displaytypes.customsingleton;
 
+import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 import org.computerspecsviewer.infoquery.utils.PrintHelpers;
 
-public class CustomSingleton<T> {
-    private T target;
+public class CustomSingleton {
+    private BaseInfoQuery target;
     private int tabCount;
 
-    public CustomSingleton(T target) {
+    public CustomSingleton(BaseInfoQuery target) {
         this(target, 1);
     }
 
-    public CustomSingleton(T target, int tabCount) {
+    public CustomSingleton(BaseInfoQuery target, int tabCount) {
         this.target = target;
         this.tabCount = tabCount;
     }
 
-    public T getTarget() {
+    public BaseInfoQuery getTarget() {
         return target;
     }
 

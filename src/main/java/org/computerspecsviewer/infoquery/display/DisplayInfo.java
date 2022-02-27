@@ -15,7 +15,7 @@ public class DisplayInfo extends BaseInfoQuery {
     public CustomField<Integer> monitorHeight;
     public CustomField<Integer> monitorWidth;
     public CustomBoolean isDigital;
-    public CustomSingleton<DisplayDescriptors> displayDescriptors;
+    public CustomSingleton displayDescriptors;
 
     public DisplayInfo(Display displayDevice) {
         final String CM = "cm";
@@ -28,6 +28,6 @@ public class DisplayInfo extends BaseInfoQuery {
         monitorHeight = new CustomField<>(EdidUtil.getVcm(edidInfo), CM);
         monitorWidth = new CustomField<>(EdidUtil.getHcm(edidInfo), CM);
         isDigital = new CustomBoolean(EdidUtil.isDigital(edidInfo), "Yes", "No (Analog)");
-        displayDescriptors = new CustomSingleton<>(new DisplayDescriptors(edidInfo));
+        displayDescriptors = new CustomSingleton(new DisplayDescriptors(edidInfo));
     }
 }
