@@ -24,8 +24,8 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainModule = 'org.openjfx'
-    mainClass = 'org.openjfx.HelloApplication'
+    mainModule = 'org.computerspecsviewer'
+    mainClass = 'org.computerspecsviewer.gui.App'
 }
 
 javafx {
@@ -36,15 +36,17 @@ javafx {
 dependencies {
     implementation('org.controlsfx:controlsfx:11.1.0')
     implementation('com.dlsc.formsfx:formsfx-core:11.3.2') {
-        exclude(group: 'org.openjfx')
+        exclude(group: 'org.computerspecsviewer')
     }
+    /*
     implementation('net.synedra:validatorfx:0.1.13') {
-        exclude(group: 'org.openjfx')
+        exclude(group: 'org.computerspecsviewer')
     }
+    */
     implementation('org.kordamp.ikonli:ikonli-javafx:12.2.0')
     implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
     implementation('eu.hansolo:tilesfx:11.48') {
-        exclude(group: 'org.openjfx')
+        exclude(group: 'org.computerspecsviewer')
     }
 
     implementation 'com.github.oshi:oshi-core:6.1.0'
