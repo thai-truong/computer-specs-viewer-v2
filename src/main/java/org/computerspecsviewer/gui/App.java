@@ -19,11 +19,11 @@ public class App extends Application {
         //InfoQueryPageComponent testInfoQueryPage = new InfoQueryPageComponent("Test", "Test", new FileSystemInfoQuery());
         //return testInfoQueryPage.get();
 
-        TreeItem<BaseTreeItemValue> testRoot = new TreeItem<>(new InfoQueryPageTreeItemValue("Test root", "Test Desc", new FileSystemInfoQuery()));
+        TreeItem<BaseTreeItemValue> testRoot = new TreeItem<>(new InfoQueryPageTreeItemValue("Test root", "Test Title", "Test Desc", new FileSystemInfoQuery()));
         testRoot.setExpanded(true);
         testRoot.getChildren().addAll(
-                new TreeItem<>(new InfoQueryPageTreeItemValue("Test Item 1", "Test Desc 1", new CpuInfoQuery())),
-                new TreeItem<>(new InfoQueryPageTreeItemValue("Test Item 2", "Test Desc 2", new DiskInfoQuery()))
+                new TreeItem<>(new InfoQueryPageTreeItemValue("Test Item 1", "Test Title 1", "Test Desc 1", new CpuInfoQuery())),
+                new TreeItem<>(new InfoQueryPageTreeItemValue("Test Item 2", "Test Title 2", "Test Desc 2", new DiskInfoQuery()))
         );
 
         return new TreeView<>(testRoot);

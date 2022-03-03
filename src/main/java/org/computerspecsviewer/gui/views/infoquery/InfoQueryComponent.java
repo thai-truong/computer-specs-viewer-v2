@@ -10,8 +10,8 @@ import org.computerspecsviewer.displaytypes.customlist.CustomList;
 import org.computerspecsviewer.displaytypes.customsingleton.CustomSingleton;
 import org.computerspecsviewer.gui.utils.ComponentHelpers;
 import org.computerspecsviewer.gui.utils.FieldType;
-import org.computerspecsviewer.gui.views.infoquery.fieldviews.CustomListComponent;
-import org.computerspecsviewer.gui.views.infoquery.fieldviews.NormalFieldComponent;
+import org.computerspecsviewer.gui.views.infoquery.fieldcomponents.CustomListComponent;
+import org.computerspecsviewer.gui.views.infoquery.fieldcomponents.NormalFieldComponent;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 
 import java.util.ArrayList;

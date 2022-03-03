@@ -12,17 +12,17 @@ public class Runner {
         setUpShutdownHook(inputReader);
 
         while(true) {
-            PrintingHelpers.printStartingInstructions();
+            PrintingHelpers.printStartingInstructions(iqc);
             String queryRequest = inputReader.next();
 
             if(foundQuitInput(queryRequest)) {
                 break;
             }
 
-            if(iqc.foundInfoType(queryRequest)) {
+            if(iqc.found(queryRequest)) {
                 PrintingHelpers.printInfoQuery(iqc, queryRequest);
             } else if(queryRequest.equals("all")) {
-                for(String infoType: InfoQueryController.allInfoTypes) {
+                for(String infoType: iqc.getInfoQueryTypes()) {
                     PrintingHelpers.printInfoQuery(iqc, infoType);
                 }
             } else {

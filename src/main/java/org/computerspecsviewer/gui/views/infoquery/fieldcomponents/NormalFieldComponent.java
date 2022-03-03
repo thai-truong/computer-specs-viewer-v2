@@ -1,4 +1,4 @@
-package org.computerspecsviewer.gui.views.infoquery.fieldviews;
+package org.computerspecsviewer.gui.views.infoquery.fieldcomponents;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;

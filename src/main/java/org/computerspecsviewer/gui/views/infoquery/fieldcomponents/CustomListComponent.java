@@ -1,4 +1,4 @@
-package org.computerspecsviewer.gui.views.infoquery.fieldviews;
+package org.computerspecsviewer.gui.views.infoquery.fieldcomponents;
 
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
