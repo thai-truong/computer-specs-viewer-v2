@@ -8,7 +8,7 @@ import javafx.scene.text.Text;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 
 public class InfoQueryPageComponent {
-    private static final Integer vBoxSpacing = 4;
+    private static final Integer vBoxSpacing = 2;
 
     public String title;
     public String description;

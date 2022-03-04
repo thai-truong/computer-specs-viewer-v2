@@ -2,9 +2,10 @@ package org.computerspecsviewer.gui.views.approot;
 
 import javafx.geometry.Orientation;
 import javafx.scene.control.Separator;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import org.computerspecsviewer.gui.views.menutree.MenuTreeComponent;
 
 public class AppRootComponent {
@@ -12,12 +13,12 @@ public class AppRootComponent {
 
     private Pane rootLayout;
     private MenuTreeComponent menuTree;
-    private Pane displaySection;
+    private BorderPane displaySection;
 
     public AppRootComponent() {
         rootLayout = new HBox(mainLayoutSpacing);
-        menuTree = new MenuTreeComponent();
-        displaySection = new VBox();
+        displaySection = new BorderPane();
+        menuTree = new MenuTreeComponent(displaySection);
 
         rootLayout.getChildren().addAll(menuTree.get(), new Separator(Orientation.VERTICAL), displaySection);
     }
