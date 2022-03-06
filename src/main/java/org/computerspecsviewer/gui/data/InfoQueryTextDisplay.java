@@ -29,7 +29,7 @@ public class InfoQueryTextDisplay {
         textDisplayInfoMap.put("computerSystem", createTextDisplayInfo("computerSystem", compSysDesc, false));
         textDisplayInfoMap.put("cpu", createTextDisplayInfo("cpu", cpuDesc, true));
         textDisplayInfoMap.put("disks", createTextDisplayInfo("disks", diskDesc, false));
-        textDisplayInfoMap.put("memory", createTextDisplayInfo("disks", memDesc, false));
+        textDisplayInfoMap.put("memory", createTextDisplayInfo("memory", memDesc, false));
         textDisplayInfoMap.put("graphicsCards", createTextDisplayInfo("graphicsCards", graphicsDesc, false));
         textDisplayInfoMap.put("displayDevices", createTextDisplayInfo("display", displayDesc, false));
         textDisplayInfoMap.put("networkInterfaces", createTextDisplayInfo("networkInterfaces", networkDesc, false));

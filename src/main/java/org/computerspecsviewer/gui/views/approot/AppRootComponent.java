@@ -22,4 +22,8 @@ public class AppRootComponent {
 
         rootLayout.getChildren().addAll(menuTree.get(), new Separator(Orientation.VERTICAL), displaySection);
     }
+
+    public Pane get() {
+        return rootLayout;
+    }
 }

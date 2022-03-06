@@ -1,6 +1,5 @@
 package org.computerspecsviewer.infoquery.computersystem;
 
-import org.computerspecsviewer.displaytypes.customsingleton.CustomSingleton;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 import org.computerspecsviewer.infoquery.singletons.SystemInfoSingleton;
 import oshi.SystemInfo;
@@ -10,8 +9,8 @@ import oshi.hardware.HardwareAbstractionLayer;
 public class ComputerSystemInfoQuery extends BaseInfoQuery {
     public String modelName;
     public String manufacturer;
-    public CustomSingleton baseboard;
-    public CustomSingleton firmware;
+    public BaseboardInfo baseboard;
+    public FirmwareInfo firmware;
     public String hardwareUuid;
     public String serialNumber;
 
@@ -24,12 +23,8 @@ public class ComputerSystemInfoQuery extends BaseInfoQuery {
         manufacturer = compSys.getManufacturer();
         hardwareUuid = compSys.getHardwareUUID();
         serialNumber = compSys.getSerialNumber();
-
-        BaseboardInfo baseboardInfo = new BaseboardInfo(compSys.getBaseboard());
-        baseboard = new CustomSingleton(baseboardInfo);
-
-        FirmwareInfo firmwareInfo = new FirmwareInfo(compSys.getFirmware());
-        firmware = new CustomSingleton(firmwareInfo);
+        baseboard = new BaseboardInfo(compSys.getBaseboard());
+        firmware = new FirmwareInfo(compSys.getFirmware());
     }
 
     public static void main(String[] args) {

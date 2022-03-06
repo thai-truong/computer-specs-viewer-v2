@@ -23,7 +23,7 @@ public class CustomList<T> {
         this.tabCount = tabCount;
     }
 
-    public List<T> getTargetList() {
+    public List<T> getUnderlyingList() {
         return targetList;
     }
 
@@ -49,14 +49,20 @@ public class CustomList<T> {
 
             for(int i = 0; i < targetList.size(); i++) {
                 T elem = targetList.get(i);
+                String superclassName = elem.getClass().getSuperclass().getSimpleName();
 
-                String titleStart = String.format("%s %d: {\n", elemTitle, index);
-                String titleEnd = "}";
+                String titleStart = String.format("%s %d: \n", elemTitle, index);
+                String titleEnd = "\n";
 
-                if(i == targetList.size() - 1) {
-                    titleEnd += "\n";
-                } else {
-                    titleEnd += ",\n";
+                if(!superclassName.equals("BaseInfoQuery")) {
+                    titleStart = String.format("%s %d: {\n", elemTitle, index);
+                    titleEnd = "}";
+
+                    if(i == targetList.size() - 1) {
+                        titleEnd += "\n";
+                    } else {
+                        titleEnd += ",\n";
+                    }
                 }
 
                 String tabbedStart = PrintHelpers.injectTabs(titleStart, titleTabCount);

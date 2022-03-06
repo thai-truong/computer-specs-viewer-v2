@@ -1,6 +1,7 @@
 package org.computerspecsviewer.infoquery.display;
 
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
+import org.computerspecsviewer.infoquery.utils.PrintHelpers;
 import oshi.util.EdidUtil;
 import oshi.util.ParseUtil;
 
@@ -46,6 +47,12 @@ public class DisplayDescriptors extends BaseInfoQuery {
 
     @Override
     public String toString() {
-        return descriptorsContent;
+        StringBuilder descriptorsInfo = new StringBuilder();
+
+        descriptorsInfo.append("{\n");
+        descriptorsInfo.append(PrintHelpers.injectTabs(descriptorsContent, 1));
+        descriptorsInfo.append("}");
+
+        return descriptorsInfo.toString();
     }
 }

@@ -2,7 +2,6 @@ package org.computerspecsviewer.infoquery.display;
 
 import org.computerspecsviewer.displaytypes.customboolean.CustomBoolean;
 import org.computerspecsviewer.displaytypes.customfield.CustomField;
-import org.computerspecsviewer.displaytypes.customsingleton.CustomSingleton;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 import oshi.hardware.Display;
 import oshi.util.EdidUtil;
@@ -15,7 +14,7 @@ public class DisplayInfo extends BaseInfoQuery {
     public CustomField<Integer> monitorHeight;
     public CustomField<Integer> monitorWidth;
     public CustomBoolean isDigital;
-    public CustomSingleton displayDescriptors;
+    public DisplayDescriptors displayDescriptors;
 
     public DisplayInfo(Display displayDevice) {
         final String CM = "cm";
@@ -28,6 +27,6 @@ public class DisplayInfo extends BaseInfoQuery {
         monitorHeight = new CustomField<>(EdidUtil.getVcm(edidInfo), CM);
         monitorWidth = new CustomField<>(EdidUtil.getHcm(edidInfo), CM);
         isDigital = new CustomBoolean(EdidUtil.isDigital(edidInfo), "Yes", "No (Analog)");
-        displayDescriptors = new CustomSingleton(new DisplayDescriptors(edidInfo));
+        displayDescriptors = new DisplayDescriptors(edidInfo);
     }
 }

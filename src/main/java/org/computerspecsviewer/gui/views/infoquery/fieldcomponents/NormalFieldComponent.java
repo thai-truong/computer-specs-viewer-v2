@@ -37,7 +37,7 @@ public class NormalFieldComponent {
         List<Node> nodesToAdd = new ArrayList<>();
 
         if(!label.isEmpty()) {
-            nodesToAdd.add(new Label(label));
+            nodesToAdd.add(new Label(label + ":"));
         }
 
         nodesToAdd.add(new Text(value));

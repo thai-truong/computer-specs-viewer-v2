@@ -1,7 +1,6 @@
 package org.computerspecsviewer.infoquery.mem;
 
 import org.computerspecsviewer.displaytypes.customlist.CustomList;
-import org.computerspecsviewer.displaytypes.customsingleton.CustomSingleton;
 import org.computerspecsviewer.displaytypes.space.Space;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 import org.computerspecsviewer.infoquery.singletons.SystemInfoSingleton;
@@ -18,7 +17,7 @@ public class MemInfoQuery extends BaseInfoQuery {
     public Space availablePhysicalMemory;
     public Space totalPhysicalMemory;
     public Space pageSize;
-    public CustomSingleton virtualMemoryInfo;
+    public VirtualMemoryInfo virtualMemoryInfo;
     public CustomList<PhysicalMemoryInfo> physicalMemoryDevices;
 
     public MemInfoQuery() {
@@ -31,7 +30,7 @@ public class MemInfoQuery extends BaseInfoQuery {
         pageSize = new Space(mem.getPageSize());
 
         VirtualMemory vMem = mem.getVirtualMemory();
-        virtualMemoryInfo = new CustomSingleton(new VirtualMemoryInfo(vMem));
+        virtualMemoryInfo = new VirtualMemoryInfo(vMem);
 
         List<PhysicalMemory> physMemList = mem.getPhysicalMemory();
         List<PhysicalMemoryInfo> physMemInfoList = new ArrayList<>();

@@ -75,7 +75,7 @@ public class ReflectionHelpers {
 
     private static Map<String, Object> getInfoFieldMap(Object target) throws IllegalAccessException {
         Field[] targetFields = target.getClass().getDeclaredFields();
-        Map<String, Object> infoFieldMap = new HashMap<>();
+        Map<String, Object> infoFieldMap = new LinkedHashMap<>();
 
         for(Field field: targetFields) {
             String fieldName = StringHelpers.transformFieldName(field.getName());

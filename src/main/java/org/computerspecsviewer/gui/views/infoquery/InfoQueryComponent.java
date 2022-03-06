@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.computerspecsviewer.displaytypes.customlist.CustomList;
-import org.computerspecsviewer.displaytypes.customsingleton.CustomSingleton;
 import org.computerspecsviewer.gui.utils.ComponentHelpers;
 import org.computerspecsviewer.gui.utils.FieldType;
 import org.computerspecsviewer.gui.views.infoquery.fieldcomponents.CustomListComponent;
@@ -54,8 +53,8 @@ public class InfoQueryComponent {
                 Node componentToAdd;
 
                 switch(ComponentHelpers.getFieldType(fieldValue)) {
-                    case CUSTOMLIST -> componentToAdd = createListField(fieldName, (CustomList<?>) fieldValue);
-                    case INFOQUERY -> componentToAdd = createInfoQueryField(fieldName, (CustomSingleton) fieldValue);
+                    case LIST -> componentToAdd = createListField(fieldName, (CustomList<?>) fieldValue);
+                    case INFOQUERY -> componentToAdd = createInfoQueryField(fieldName, (BaseInfoQuery) fieldValue);
                     default -> {
                         NormalFieldComponent normalField = new NormalFieldComponent(fieldName, fieldValue);
                         componentToAdd = normalField.get();
@@ -70,7 +69,7 @@ public class InfoQueryComponent {
     }
 
     private Pane createListField(String fieldName, CustomList<?> fieldList) {
-        Label label = new Label(fieldName);
+        Label label = new Label(fieldName + ":");
         VBox container = new VBox(vBoxSpacing);
 
         CustomListComponent listComponent = new CustomListComponent(fieldList);
@@ -78,19 +77,6 @@ public class InfoQueryComponent {
         listAccordion.setPadding(leftPadding);
 
         container.getChildren().addAll(label, listAccordion);
-
-        return container;
-    }
-
-    private Pane createInfoQueryField(String fieldName, CustomSingleton fieldInfoQuery) {
-        Label label = new Label(fieldName);
-        VBox container = new VBox(vBoxSpacing);
-
-        InfoQueryComponent infoQueryComponent = new InfoQueryComponent(fieldInfoQuery.getTarget());
-        Pane infoQueryVBox = infoQueryComponent.get();
-        infoQueryVBox.setPadding(leftPadding);
-
-        container.getChildren().addAll(label, infoQueryVBox);
 
         return container;
     }
@@ -103,12 +89,25 @@ public class InfoQueryComponent {
                 Object fieldValue = entry.getValue();
                 FieldType valueType = ComponentHelpers.getFieldType(fieldValue);
 
-                if(valueType == FieldType.CUSTOMLIST) {
+                if(valueType == FieldType.LIST) {
                     foundList = (CustomList<?>)fieldValue;
                 }
             }
         }
 
         return foundList;
+    }
+
+    private Pane createInfoQueryField(String fieldName, BaseInfoQuery fieldInfoQuery) {
+        Label label = new Label(fieldName + ":");
+        VBox container = new VBox(vBoxSpacing);
+
+        InfoQueryComponent infoQueryComponent = new InfoQueryComponent(fieldInfoQuery);
+        Pane infoQueryVBox = infoQueryComponent.get();
+        infoQueryVBox.setPadding(leftPadding);
+
+        container.getChildren().addAll(label, infoQueryVBox);
+
+        return container;
     }
 }

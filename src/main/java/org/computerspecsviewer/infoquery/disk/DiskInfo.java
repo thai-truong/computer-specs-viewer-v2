@@ -19,7 +19,7 @@ public class DiskInfo extends BaseInfoQuery {
     public CustomNumber writeCount;
     public Space writeBytes;
     public Space size;
-    public CustomList<DiskPartition> customPartitions;
+    public CustomList<DiskPartition> partitions;
 
     public DiskInfo(HWDiskStore disk) {
         name = disk.getName();
@@ -32,12 +32,12 @@ public class DiskInfo extends BaseInfoQuery {
         size = new Space(disk.getSize());
 
         List<HWPartition> queriedPartitions = disk.getPartitions();
-        List<DiskPartition> partitions = new ArrayList<>();
+        List<DiskPartition> diskPartitions = new ArrayList<>();
 
         for(HWPartition partition: queriedPartitions) {
-            partitions.add(new DiskPartition(partition));
+            diskPartitions.add(new DiskPartition(partition));
         }
 
-        customPartitions = new CustomList<>(partitions, "Disk Partition", true);
+        partitions = new CustomList<>(diskPartitions, "Disk Partition", true);
     }
 }

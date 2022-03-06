@@ -3,10 +3,10 @@ package org.computerspecsviewer.gui.views.infoquery.fieldcomponents;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
 import org.computerspecsviewer.displaytypes.customlist.CustomList;
-import org.computerspecsviewer.displaytypes.customsingleton.CustomSingleton;
 import org.computerspecsviewer.gui.utils.ComponentHelpers;
 import org.computerspecsviewer.gui.utils.FieldType;
 import org.computerspecsviewer.gui.views.infoquery.InfoQueryComponent;
+import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class CustomListComponent {
     Accordion listAccordion;
 
     public CustomListComponent(CustomList<?> customList) {
-        listToDisplay = customList.getTargetList();
+        listToDisplay = customList.getUnderlyingList();
         elemTitle = customList.getElemTitle();
         elemIndex = 0;
     }
@@ -39,8 +39,8 @@ public class CustomListComponent {
 
             if(listElemType == FieldType.INFOQUERY) {
                 for(Object elem: listToDisplay) {
-                    CustomSingleton infoSingleton = (CustomSingleton) elem;
-                    InfoQueryComponent infoQueryComponent = new InfoQueryComponent(infoSingleton.getTarget());
+                    BaseInfoQuery infoQuery = (BaseInfoQuery) elem;
+                    InfoQueryComponent infoQueryComponent = new InfoQueryComponent(infoQuery);
                     accElemList.add(new TitledPane(getCurrentTitle(), infoQueryComponent.get()));
                 }
             } else {

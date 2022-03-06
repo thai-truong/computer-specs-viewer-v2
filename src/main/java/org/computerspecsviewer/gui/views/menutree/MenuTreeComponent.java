@@ -25,7 +25,6 @@ public class MenuTreeComponent {
         return menuTree;
     }
 
-
     private void createMenuTree() {
         TreeItem<BaseTreeItemValue> emptyRoot = new TreeItem<>(new RootTreeItemValue());
 
