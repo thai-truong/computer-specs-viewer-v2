@@ -11,5 +11,5 @@ module org.computerspecsviewer {
 
     requires com.github.oshi;
 
-    exports org.computerspecsviewer.gui;
+    exports org.computerspecsviewer.gui.mainapp;
 }

@@ -25,7 +25,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'org.computerspecsviewer'
-    mainClass = 'org.computerspecsviewer.gui.App'
+    mainClass = 'org.computerspecsviewer.gui.mainapp.App'
 }
 
 javafx {

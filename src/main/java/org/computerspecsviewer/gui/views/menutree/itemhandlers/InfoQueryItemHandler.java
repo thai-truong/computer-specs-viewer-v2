@@ -1,9 +1,9 @@
-package org.computerspecsviewer.gui.views.menutree.treeitemhandlers;
+package org.computerspecsviewer.gui.views.menutree.itemhandlers;
 
 import javafx.scene.control.TreeItem;
 import org.computerspecsviewer.gui.viewmodels.InfoQueryViewModel;
-import org.computerspecsviewer.gui.views.menutree.treeitemvalue.BaseTreeItemValue;
-import org.computerspecsviewer.gui.views.menutree.treeitemvalue.InfoQueryPageTreeItemValue;
+import org.computerspecsviewer.gui.views.menutree.itemvalue.BaseItemValue;
+import org.computerspecsviewer.gui.views.menutree.itemvalue.InfoQueryPageItemValue;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 import oshi.util.tuples.Quartet;
 
@@ -13,14 +13,14 @@ import java.util.List;
 
 public class InfoQueryItemHandler {
     private Collection<Quartet<String, String, String, BaseInfoQuery>> infoQueryDisplays;
-    private List<TreeItem<BaseTreeItemValue>> converted = new ArrayList<>();
+    private List<TreeItem<BaseItemValue>> converted = new ArrayList<>();
 
     public InfoQueryItemHandler() {
         InfoQueryViewModel infoQueryViewModel = InfoQueryViewModel.getInstance();
         infoQueryDisplays = infoQueryViewModel.getInfoQueryMap().values();
     }
 
-    public List<TreeItem<BaseTreeItemValue>> getItems() {
+    public List<TreeItem<BaseItemValue>> getItems() {
         if(converted.size() == 0) {
             for(Quartet<String, String, String, BaseInfoQuery> elem: infoQueryDisplays) {
                 String treeLabel = elem.getA();
@@ -28,7 +28,7 @@ public class InfoQueryItemHandler {
                 String desc = elem.getC();
                 BaseInfoQuery infoQuery = elem.getD();
 
-                converted.add(new TreeItem(new InfoQueryPageTreeItemValue(treeLabel, title, desc, infoQuery)));
+                converted.add(new TreeItem(new InfoQueryPageItemValue(treeLabel, title, desc, infoQuery)));
             }
         }
 

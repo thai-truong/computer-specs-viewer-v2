@@ -1,17 +1,10 @@
-package org.computerspecsviewer.gui;
+package org.computerspecsviewer.gui.mainapp;
 
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
 import javafx.stage.Stage;
-import org.computerspecsviewer.gui.views.approot.AppRootComponent;
-import org.computerspecsviewer.gui.views.menutree.treeitemvalue.BaseTreeItemValue;
-import org.computerspecsviewer.gui.views.menutree.treeitemvalue.InfoQueryPageTreeItemValue;
-import org.computerspecsviewer.infoquery.cpu.CpuInfoQuery;
-import org.computerspecsviewer.infoquery.disk.DiskInfoQuery;
-import org.computerspecsviewer.infoquery.filesystem.FileSystemInfoQuery;
+import org.computerspecsviewer.gui.mainapp.approot.AppRootComponent;
 
 public class App extends Application {
     // This will be the place to initialize all needed UI components/elements

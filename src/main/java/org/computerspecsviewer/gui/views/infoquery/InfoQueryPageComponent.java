@@ -13,7 +13,7 @@ public class InfoQueryPageComponent {
     public String title;
     public String description;
     public BaseInfoQuery infoQuery;
-    public Pane infoQueryPage;
+    public VBox infoQueryPage;
 
     public InfoQueryPageComponent(String title, String description, BaseInfoQuery infoQuery) {
         this.title = title;
