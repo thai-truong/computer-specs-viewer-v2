@@ -18,9 +18,10 @@ import org.computerspecsviewer.infoquery.usbdevice.UsbDeviceInfoQuery;
 import java.util.*;
 
 public class InfoQueryController {
-    private static final Map<String, BaseInfoQuery> infoQueryMap;
+    private static InfoQueryController controllerInstance;
+    private final Map<String, BaseInfoQuery> infoQueryMap;
 
-    static {
+    private InfoQueryController() {
         infoQueryMap = new LinkedHashMap<>();
         infoQueryMap.put("computerSystem", new ComputerSystemInfoQuery());
         infoQueryMap.put("cpu", new CpuInfoQuery());
@@ -37,7 +38,13 @@ public class InfoQueryController {
         infoQueryMap.put("networkStatistics", new NetworkProtocolStatisticsQuery());
     }
 
-    public InfoQueryController() {}
+    public static InfoQueryController getInstance() {
+        if(controllerInstance == null) {
+            controllerInstance = new InfoQueryController();
+        }
+
+        return controllerInstance;
+    }
 
     public boolean found(String infoType) {
         return infoQueryMap.containsKey(infoType);

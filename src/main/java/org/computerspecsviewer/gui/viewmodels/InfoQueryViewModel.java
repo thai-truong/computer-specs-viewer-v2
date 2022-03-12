@@ -18,7 +18,7 @@ public class InfoQueryViewModel {
         infoQueryMap = new LinkedHashMap<>();
 
         InfoQueryTextDisplay infoQueryTextDisplay = new InfoQueryTextDisplay();
-        InfoQueryController infoQueryController = new InfoQueryController();
+        InfoQueryController infoQueryController = InfoQueryController.getInstance();
         List<String> infoQueryTypes = infoQueryController.getInfoQueryTypes();
 
         for(String type: infoQueryTypes) {

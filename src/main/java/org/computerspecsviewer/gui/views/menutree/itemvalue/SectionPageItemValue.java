@@ -1,17 +1,21 @@
 package org.computerspecsviewer.gui.views.menutree.itemvalue;
 
 import javafx.scene.Node;
+import javafx.scene.text.Text;
 import org.computerspecsviewer.gui.views.sections.SectionPageComponent;
 
 public class SectionPageItemValue implements BaseItemValue {
     private String itemLabel;
-    private String title;
     private Node displayComponent;
     private SectionPageComponent sectionPage;
 
-    public SectionPageItemValue(String itemLabel, String title, Node displayComponent) {
+    public SectionPageItemValue(String itemLabel, String description) {
         this.itemLabel = itemLabel;
-        this.title = title;
+        this.displayComponent = new Text(description);
+    }
+
+    public SectionPageItemValue(String itemLabel, Node displayComponent) {
+        this.itemLabel = itemLabel;
         this.displayComponent = displayComponent;
     }
 
@@ -21,7 +25,7 @@ public class SectionPageItemValue implements BaseItemValue {
 
     public Node getComponentToDisplay() {
         if(sectionPage == null) {
-            sectionPage = new SectionPageComponent(title, displayComponent);
+            sectionPage = new SectionPageComponent(itemLabel, displayComponent);
         }
 
         return sectionPage.get();

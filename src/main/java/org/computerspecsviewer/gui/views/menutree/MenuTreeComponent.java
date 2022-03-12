@@ -4,19 +4,34 @@ import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.BorderPane;
-import org.computerspecsviewer.gui.views.menutree.itemhandlers.InfoQueryItemHandler;
+import org.computerspecsviewer.gui.data.SectionTextDisplay;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.BaseItemValue;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.RootItemValue;
+import org.computerspecsviewer.gui.views.menutree.itemvalue.SectionPageItemValue;
+import org.computerspecsviewer.infoquery.utils.StringHelpers;
+import oshi.util.tuples.Pair;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MenuTreeComponent {
     private TreeView<BaseItemValue> menuTree;
-    private BorderPane appDisplaySection;
+    private Map<String, List<String>> sectionStructure;
+    private Map<String, TreeItem<BaseItemValue>> leafSections;
+    private SectionTextDisplay sectionTextDisplay;
+
+    private BorderPane appDisplayComponent;
     private TreeItem<BaseItemValue> treeRoot = new TreeItem<>(new RootItemValue());
 
-    public MenuTreeComponent(BorderPane appDisplaySection) {
-        this.appDisplaySection = appDisplaySection;
+    public MenuTreeComponent(BorderPane appDisplayComponent) {
+        this.appDisplayComponent = appDisplayComponent;
+        
+        MenuTreeStructure structure = new MenuTreeStructure();
+        Pair<Map<String, List<String>>, Map<String, TreeItem<BaseItemValue>>> structureDetails = structure.get();
+        sectionStructure = structureDetails.getA();
+        leafSections = structureDetails.getB();
+        sectionTextDisplay = new SectionTextDisplay();
     }
 
     public TreeView<BaseItemValue> getComponent() {
@@ -27,15 +42,12 @@ public class MenuTreeComponent {
         return menuTree;
     }
 
-    public void setRootChildren(List<TreeItem<BaseItemValue>> newChildren) {
-        treeRoot.getChildren().setAll(newChildren);
-    }
-
     private void createComponent() {
         menuTree = new TreeView<>(treeRoot);
         menuTree.setShowRoot(false);
 
         addItemSelectedListener();
+        addStructure();
     }
 
     private void addItemSelectedListener() {
@@ -44,8 +56,50 @@ public class MenuTreeComponent {
             Node componentToDisplay = selectedItem.getValue().getComponentToDisplay();
 
             if(componentToDisplay != null) {
-                appDisplaySection.setCenter(componentToDisplay);
+                appDisplayComponent.setCenter(componentToDisplay);
             }
         });
+    }
+
+    private void addStructure() {
+        List<TreeItem<BaseItemValue>> topLevelSections = new ArrayList<>();
+
+        for(String section: sectionStructure.keySet()) {
+            topLevelSections.add(createTreeItem(section));
+        }
+
+        treeRoot.getChildren().addAll(topLevelSections);
+    }
+    
+    private TreeItem<BaseItemValue> createTreeItem(String currSection) {
+        List<TreeItem<BaseItemValue>> childrenSections = new ArrayList<>();
+        
+        if(!sectionStructure.containsKey(currSection)) {
+            if(!leafSections.containsKey(currSection)) {
+                return null;
+            }
+
+            return leafSections.get(currSection);
+        }
+
+        for(String childSection: sectionStructure.get(currSection)) {
+            TreeItem<BaseItemValue> childTreeItem = createTreeItem(childSection);
+
+            if(childTreeItem != null) {
+                childrenSections.add(childTreeItem);
+            }
+        }
+
+        String currSectionTitle = StringHelpers.transformFieldName(currSection);
+        String currSectionDesc = sectionTextDisplay.found(currSection)
+                ? sectionTextDisplay.get(currSection)
+                : "";
+
+        TreeItem<BaseItemValue> currSectionItem = new TreeItem<>(new SectionPageItemValue(
+                currSectionTitle, currSectionDesc
+        ));
+        currSectionItem.getChildren().addAll(childrenSections);
+
+        return currSectionItem;
     }
 }

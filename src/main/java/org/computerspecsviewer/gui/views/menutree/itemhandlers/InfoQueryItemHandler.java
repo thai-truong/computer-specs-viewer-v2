@@ -7,22 +7,21 @@ import org.computerspecsviewer.gui.views.menutree.itemvalue.InfoQueryPageItemVal
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 import oshi.util.tuples.Quartet;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class InfoQueryItemHandler {
-    private Collection<Quartet<String, String, String, BaseInfoQuery>> infoQueryDisplays;
+    private Map<String, Quartet<String, String, String, BaseInfoQuery>> infoQueryDisplayMap;
     private List<TreeItem<BaseItemValue>> converted = new ArrayList<>();
+    private Map<String, TreeItem<BaseItemValue>> convertedMap = new HashMap<>();
 
     public InfoQueryItemHandler() {
         InfoQueryViewModel infoQueryViewModel = InfoQueryViewModel.getInstance();
-        infoQueryDisplays = infoQueryViewModel.getInfoQueryMap().values();
+        infoQueryDisplayMap = infoQueryViewModel.getInfoQueryMap();
     }
 
     public List<TreeItem<BaseItemValue>> getItems() {
         if(converted.size() == 0) {
-            for(Quartet<String, String, String, BaseInfoQuery> elem: infoQueryDisplays) {
+            for(Quartet<String, String, String, BaseInfoQuery> elem: infoQueryDisplayMap.values()) {
                 String treeLabel = elem.getA();
                 String title = elem.getB();
                 String desc = elem.getC();
@@ -33,5 +32,24 @@ public class InfoQueryItemHandler {
         }
 
         return converted;
+    }
+
+    public Map<String, TreeItem<BaseItemValue>> getItemsMap() {
+        if(convertedMap.size() == 0) {
+            for(Map.Entry<String, Quartet<String, String, String, BaseInfoQuery>> entry: infoQueryDisplayMap.entrySet()) {
+                String infoQueryType = entry.getKey();
+                Quartet<String, String, String, BaseInfoQuery> infoQueryDisplay = entry.getValue();
+
+                String treeLabel = infoQueryDisplay.getA();
+                String title = infoQueryDisplay.getB();
+                String desc = infoQueryDisplay.getC();
+                BaseInfoQuery infoQuery = infoQueryDisplay.getD();
+
+                convertedMap.put(infoQueryType,
+                        new TreeItem(new InfoQueryPageItemValue(treeLabel, title, desc, infoQuery)));
+            }
+        }
+
+        return convertedMap;
     }
 }

@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Runner {
     public static void main(String[] args) {
-        InfoQueryController iqc = new InfoQueryController();
+        InfoQueryController iqc = InfoQueryController.getInstance();
 
         Scanner inputReader = new Scanner(System.in);
         setUpShutdownHook(inputReader);
