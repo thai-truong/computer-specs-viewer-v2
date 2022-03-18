@@ -21,14 +21,14 @@ public class InfoQueryPageComponent extends PageComponent {
     }
 
     protected void create() {
-        page = new VBox(vBoxSpacing);
-
         Label pageTitle = new Label(title);
         Text pageDescription = new Text(description);
         InfoQueryComponent infoQueryComponent = new InfoQueryComponent(infoQuery);
 
+        page = new VBox(vBoxSpacing);
+
         page.getChildren().addAll(pageTitle,
                 new Separator(), pageDescription,
-                new Separator(), infoQueryComponent.get());
+                new Separator(), addScroller(infoQueryComponent.get()));
     }
 }

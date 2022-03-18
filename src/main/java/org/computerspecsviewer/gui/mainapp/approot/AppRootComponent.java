@@ -1,28 +1,27 @@
 package org.computerspecsviewer.gui.mainapp.approot;
 
-import javafx.geometry.Orientation;
-import javafx.scene.control.Separator;
+import javafx.geometry.Insets;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import org.computerspecsviewer.gui.views.menutree.MenuTreeComponent;
 
 public class AppRootComponent {
-    private static final Integer mainLayoutSpacing = 2;
+    private static final Insets smallLeftPadding = new Insets(5, 0, 0, 10);
 
-    private Pane rootLayout;
+    private SplitPane rootLayout;
     private MenuTreeComponent menuTree;
-    private BorderPane displaySection;
+    private BorderPane displayPane;
 
     public AppRootComponent() {
-        rootLayout = new HBox(mainLayoutSpacing);
-        displaySection = new BorderPane();
-        menuTree = new MenuTreeComponent(displaySection);
+        displayPane = new BorderPane();
+        displayPane.setPadding(smallLeftPadding);
 
-        rootLayout.getChildren().addAll(menuTree.getComponent(), new Separator(Orientation.VERTICAL), displaySection);
+        menuTree = new MenuTreeComponent(displayPane);
+        rootLayout = new SplitPane(menuTree.getComponent(), displayPane);
+        rootLayout.setDividerPosition(0, 0.25);
     }
 
-    public Pane get() {
+    public SplitPane get() {
         return rootLayout;
     }
 }

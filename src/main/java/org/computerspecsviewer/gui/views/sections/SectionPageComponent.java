@@ -27,6 +27,6 @@ public class SectionPageComponent extends PageComponent {
         page = new VBox(vBoxSpacing);
         Label pageTitle = new Label(title);
         
-        page.getChildren().addAll(pageTitle, new Separator(), displayComponent);
+        page.getChildren().addAll(pageTitle, new Separator(), addScroller(displayComponent));
     }
 }
