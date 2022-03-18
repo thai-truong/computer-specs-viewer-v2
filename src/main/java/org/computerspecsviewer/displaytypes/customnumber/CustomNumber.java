@@ -21,10 +21,10 @@ public class CustomNumber {
         expToCustomNumberUnit.put(12, CustomNumberUnits.T);
     }
 
-    public Number value;
-    public double convValue;
-    public CustomNumberUnits convUnit;
-    public String valueName;
+    private Number value;
+    private double convValue;
+    private CustomNumberUnits convUnit;
+    private String valueName;
 
     public CustomNumber(Number value, String valueName) {
         this.value = value;

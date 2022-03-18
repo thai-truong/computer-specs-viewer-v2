@@ -5,9 +5,9 @@ import java.time.Duration;
 public class CustomDuration {
     private static final String[] durationInfoStrings = new String[]{"days", "hours", "minutes", "seconds"};
 
-    public Duration duration;
-    public DurationLimit durationLimit;
-    public boolean isNegative;
+    private Duration duration;
+    private DurationLimit durationLimit;
+    private boolean isNegative;
 
     public CustomDuration(long seconds) {
         this(seconds, DurationLimit.UP_TO_DAYS);

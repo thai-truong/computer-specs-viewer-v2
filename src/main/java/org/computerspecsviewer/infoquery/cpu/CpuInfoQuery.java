@@ -18,8 +18,8 @@ public class CpuInfoQuery extends BaseInfoQuery {
     public String physicalId;
     public CustomBoolean is64bit;
     public CustomField<Double> maxFrequency;
-    public int logicalCoreCount;
-    public int physicalCoreCount;
+    public Integer logicalCoreCount;
+    public Integer physicalCoreCount;
     public CustomNumber interruptCount;
     public CustomNumber contextSwitchCount;
 

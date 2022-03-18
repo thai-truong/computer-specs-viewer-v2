@@ -6,23 +6,23 @@ import java.util.Scanner;
 
 public class Runner {
     public static void main(String[] args) {
-        InfoQueryController iqc = new InfoQueryController();
+        InfoQueryController iqc = InfoQueryController.getInstance();
 
         Scanner inputReader = new Scanner(System.in);
         setUpShutdownHook(inputReader);
 
         while(true) {
-            PrintingHelpers.printStartingInstructions();
+            PrintingHelpers.printStartingInstructions(iqc);
             String queryRequest = inputReader.next();
 
             if(foundQuitInput(queryRequest)) {
                 break;
             }
 
-            if(iqc.foundInfoType(queryRequest)) {
+            if(iqc.found(queryRequest)) {
                 PrintingHelpers.printInfoQuery(iqc, queryRequest);
             } else if(queryRequest.equals("all")) {
-                for(String infoType: InfoQueryController.allInfoTypes) {
+                for(String infoType: iqc.getInfoQueryTypes()) {
                     PrintingHelpers.printInfoQuery(iqc, infoType);
                 }
             } else {

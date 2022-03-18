@@ -15,17 +15,14 @@ import org.computerspecsviewer.infoquery.powersource.PowerSourceInfoQuery;
 import org.computerspecsviewer.infoquery.soundcard.SoundCardInfoQuery;
 import org.computerspecsviewer.infoquery.usbdevice.UsbDeviceInfoQuery;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class InfoQueryController {
-    private static final Map<String, BaseInfoQuery> infoQueryMap;
-    public static final String[] allInfoTypes = {"computerSystem", "cpu", "disks", "memory", "graphicsCards",
-            "displayDevices", "networkInterfaces", "powerSources", "soundCards", "usbDevices", "operatingSystem",
-            "fileSystem", "networkStatistics"};
+    private static InfoQueryController controllerInstance;
+    private final Map<String, BaseInfoQuery> infoQueryMap;
 
-    static {
-        infoQueryMap = new HashMap<>();
+    private InfoQueryController() {
+        infoQueryMap = new LinkedHashMap<>();
         infoQueryMap.put("computerSystem", new ComputerSystemInfoQuery());
         infoQueryMap.put("cpu", new CpuInfoQuery());
         infoQueryMap.put("disks", new DiskInfoQuery());
@@ -41,13 +38,29 @@ public class InfoQueryController {
         infoQueryMap.put("networkStatistics", new NetworkProtocolStatisticsQuery());
     }
 
-    public InfoQueryController() {}
+    public static InfoQueryController getInstance() {
+        if(controllerInstance == null) {
+            controllerInstance = new InfoQueryController();
+        }
 
-    public boolean foundInfoType(String infoType) {
+        return controllerInstance;
+    }
+
+    public boolean found(String infoType) {
         return infoQueryMap.containsKey(infoType);
     }
 
-    public BaseInfoQuery getInfoQuery(String infoType) {
+    public BaseInfoQuery get(String infoType) {
         return infoQueryMap.get(infoType);
+    }
+
+    public List<String> getInfoQueryTypes() {
+        List<String> types = new ArrayList<>();
+
+        for(String type: infoQueryMap.keySet()) {
+            types.add(type);
+        }
+
+        return types;
     }
 }

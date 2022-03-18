@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.Map;
 
 public class NetworkInterfaceInfo extends BaseInfoQuery {
-    public int index;
+    public Integer index;
     public String name;
     public String alias;
     public String description;
     public String operationalStatus;
-    public int interfaceType;
+    public Integer interfaceType;
     public CustomList<String> ipV4Addresses;
     public CustomList<String> ipV6Addresses;
     public String macAddress;

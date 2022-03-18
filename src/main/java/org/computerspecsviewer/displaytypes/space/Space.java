@@ -14,9 +14,9 @@ public class Space {
         spaceUnitToExp.put(SpaceUnits.GB, 9);
     }
 
-    public long valueInByte;
-    public double convVal;
-    public SpaceUnits convUnit;
+    private long valueInByte;
+    private double convVal;
+    private SpaceUnits convUnit;
 
     public Space(long valueInByte) {
         this(valueInByte, SpaceUnits.GB);

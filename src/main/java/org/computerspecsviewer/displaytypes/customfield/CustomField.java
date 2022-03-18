@@ -1,12 +1,16 @@
 package org.computerspecsviewer.displaytypes.customfield;
 
 public class CustomField<T> {
-    public T fieldValue;
-    public String fieldInfo;
+    private T fieldValue;
+    private String fieldInfo;
 
     public CustomField(T fieldValue, String fieldInfo) {
         this.fieldValue = fieldValue;
         this.fieldInfo = fieldInfo;
+    }
+
+    public T getFieldValue() {
+        return fieldValue;
     }
 
     @Override

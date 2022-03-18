@@ -11,11 +11,11 @@ public class PrintingHelpers {
     static void printInfoQuery(InfoQueryController iqc, String queryRequest) {
         System.out.println();
         System.out.println(StringHelpers.transformFieldName(queryRequest) + " Info:");
-        System.out.println(PrintHelpers.injectTabs(iqc.getInfoQuery(queryRequest).toString(), 1));
+        System.out.println(PrintHelpers.injectTabs(iqc.get(queryRequest).toString(), 1));
     }
 
-    static void printStartingInstructions() {
-        List<String> allInfoTypes = Arrays.asList(InfoQueryController.allInfoTypes);
+    static void printStartingInstructions(InfoQueryController iqc) {
+        List<String> allInfoTypes = iqc.getInfoQueryTypes();
         String infoTypesWithNewlines = PrintHelpers.injectNewlinesInFront(allInfoTypes).toString();
         String printedAllInfoTypes = PrintHelpers.injectTabs(infoTypesWithNewlines, 1);
 

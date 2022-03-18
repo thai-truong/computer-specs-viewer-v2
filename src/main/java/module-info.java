@@ -1,4 +1,4 @@
-module org.openjfx {
+module org.computerspecsviewer {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -11,6 +11,5 @@ module org.openjfx {
 
     requires com.github.oshi;
 
-    opens org.openjfx to javafx.fxml;
-    exports org.openjfx;
+    exports org.computerspecsviewer.gui.mainapp;
 }
