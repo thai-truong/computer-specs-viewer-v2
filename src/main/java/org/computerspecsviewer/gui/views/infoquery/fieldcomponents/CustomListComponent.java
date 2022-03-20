@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomListComponent {
-    List<?> listToDisplay;
-    String elemTitle;
-    Integer elemIndex;
-    Accordion listAccordion;
+    private List<?> listToDisplay;
+    private String elemTitle;
+    private Integer elemIndex;
+    private Accordion listAccordion;
 
     public CustomListComponent(CustomList<?> customList) {
         listToDisplay = customList.getUnderlyingList();

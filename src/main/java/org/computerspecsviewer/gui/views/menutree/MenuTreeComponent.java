@@ -73,7 +73,8 @@ public class MenuTreeComponent {
     
     private TreeItem<BaseItemValue> createTreeItem(String currSection) {
         List<TreeItem<BaseItemValue>> childrenSections = new ArrayList<>();
-        
+
+        // If a section does not have any child sections, then it must be a leaf containing a page component
         if(!sectionStructure.containsKey(currSection)) {
             if(!leafSections.containsKey(currSection)) {
                 return null;

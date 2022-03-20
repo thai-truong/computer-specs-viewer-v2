@@ -5,11 +5,11 @@ import org.computerspecsviewer.gui.views.infoquery.InfoQueryPageComponent;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 
 public class InfoQueryPageItemValue implements BaseItemValue {
-    public String treeLabel;
-    public String title;
-    public String description;
-    public BaseInfoQuery infoQuery;
-    public InfoQueryPageComponent infoQueryPage;
+    private String treeLabel;
+    private String title;
+    private String description;
+    private BaseInfoQuery infoQuery;
+    private InfoQueryPageComponent infoQueryPage;
 
     public InfoQueryPageItemValue(String treeLabel, String title, String description, BaseInfoQuery infoQuery) {
         this.treeLabel = treeLabel;
