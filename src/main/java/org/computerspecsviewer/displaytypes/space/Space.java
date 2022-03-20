@@ -28,6 +28,10 @@ public class Space {
         this.convUnit = unit;
     }
 
+    public long getValueInByte() {
+        return valueInByte;
+    }
+
     @Override
     public String toString() {
         double val = this.convVal;

@@ -21,8 +21,8 @@ public class InfoQueryComponent {
     private static final Integer vBoxSpacing = 4;
     private static final Insets leftPadding = new Insets(0, 0, 0, 20);
 
-    public Map<String, Object> rawFieldsMap;
-    public Pane infoQueryComponent;
+    private Map<String, Object> rawFieldsMap;
+    private Pane infoQueryComponent;
 
     public InfoQueryComponent(BaseInfoQuery infoQuery) {
         rawFieldsMap = infoQuery.getRawFieldsAsMap();

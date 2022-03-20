@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.computerspecsviewer.gui.assets.AppIcons;
 import org.computerspecsviewer.gui.mainapp.approot.AppRootComponent;
 
 public class App extends Application {
@@ -15,9 +16,16 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        // Placeholder
-        stage.setScene(new Scene(createAppContent(), 800, 600));
+        initializeStage(stage);
         stage.show();
+    }
+
+    private void initializeStage(Stage stage) {
+        AppIcons appIcons = new AppIcons();
+
+        stage.setScene(new Scene(createAppContent(), 800, 600));
+        stage.setTitle("Computer Specs Viewer 2.0");
+        stage.getIcons().add(appIcons.getMainAppIcon());
     }
 
     public static void main(String[] args) {
