@@ -23,6 +23,7 @@ public class MenuTreeComponent {
 
     private BorderPane appDisplayComponent;
     private TreeItem<BaseItemValue> treeRoot = new TreeItem<>(new RootItemValue());
+    private TreeItem<BaseItemValue> treePrimaryItem;
 
     public MenuTreeComponent(BorderPane appDisplayComponent) {
         this.appDisplayComponent = appDisplayComponent;
@@ -44,10 +45,20 @@ public class MenuTreeComponent {
 
     private void createComponent() {
         menuTree = new TreeView<>(treeRoot);
-        menuTree.setShowRoot(false);
 
+        // Due to a JavaFX bug where programmatically expanding then selecting parent section item (p1)
+        // when root item (r1) is already not shown selects p1 AND another section item that is a child of p1.
+        // To get around this weird bug, expand r1 while it is still shown, expand and select p1,
+        // then hide r1 afterwards, as below.
+        treeRoot.setExpanded(true);
+        configureMenuTree();
+        menuTree.setShowRoot(false);
+    }
+
+    private void configureMenuTree() {
         addItemSelectedListener();
         addStructure();
+        setTreeDefaults();
     }
 
     private void addItemSelectedListener() {
@@ -68,7 +79,15 @@ public class MenuTreeComponent {
             topLevelSections.add(createTreeItem(section));
         }
 
+        treePrimaryItem = topLevelSections.get(0);
         treeRoot.getChildren().addAll(topLevelSections);
+    }
+
+    private void setTreeDefaults() {
+        treePrimaryItem.setExpanded(true);
+
+        Integer primaryItemIdx = menuTree.getRow(treePrimaryItem);
+        menuTree.getSelectionModel().select(primaryItemIdx);
     }
     
     private TreeItem<BaseItemValue> createTreeItem(String currSection) {
