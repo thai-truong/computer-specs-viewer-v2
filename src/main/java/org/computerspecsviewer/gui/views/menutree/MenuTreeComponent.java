@@ -10,6 +10,7 @@ import org.computerspecsviewer.gui.views.menutree.itemvalue.RootItemValue;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.SectionPageItemValue;
 import org.computerspecsviewer.infoquery.utils.StringHelpers;
 import oshi.util.tuples.Pair;
+import oshi.util.tuples.Triplet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public class MenuTreeComponent {
     private TreeView<BaseItemValue> menuTree;
     private Map<String, List<String>> sectionStructure;
     private Map<String, TreeItem<BaseItemValue>> leafSections;
+    private Map<String, Node> sectionDisplays;
     private SectionTextDisplay sectionTextDisplay;
 
     private BorderPane appDisplayComponent;
@@ -27,12 +29,7 @@ public class MenuTreeComponent {
 
     public MenuTreeComponent(BorderPane appDisplayComponent) {
         this.appDisplayComponent = appDisplayComponent;
-        
-        MenuTreeStructure structure = new MenuTreeStructure();
-        Pair<Map<String, List<String>>, Map<String, TreeItem<BaseItemValue>>> structureDetails = structure.get();
-        sectionStructure = structureDetails.getA();
-        leafSections = structureDetails.getB();
-        sectionTextDisplay = new SectionTextDisplay();
+        sectionTextDisplay = SectionTextDisplay.getInstance();
     }
 
     public TreeView<BaseItemValue> getComponent() {
@@ -50,12 +47,19 @@ public class MenuTreeComponent {
         // when root item (r1) is already not shown selects p1 AND another section item that is a child of p1.
         // To get around this weird bug, expand r1 while it is still shown, expand and select p1,
         // then hide r1 afterwards, as below.
-        treeRoot.setExpanded(true);
+        menuTree.getRoot().setExpanded(true);
         configureMenuTree();
         menuTree.setShowRoot(false);
     }
 
     private void configureMenuTree() {
+        MenuTreeStructure structure = new MenuTreeStructure(menuTree.getSelectionModel());
+        Triplet<Map<String, List<String>>, Map<String, TreeItem<BaseItemValue>>, Map<String, Node>> structureDetails = structure.get();
+
+        sectionStructure = structureDetails.getA();
+        leafSections = structureDetails.getB();
+        sectionDisplays = structureDetails.getC();
+
         addItemSelectedListener();
         addStructure();
         setTreeDefaults();
@@ -91,6 +95,7 @@ public class MenuTreeComponent {
     }
     
     private TreeItem<BaseItemValue> createTreeItem(String currSection) {
+        TreeItem<BaseItemValue> currSectionItem;
         List<TreeItem<BaseItemValue>> childrenSections = new ArrayList<>();
 
         // If a section does not have any child sections, then it must be a leaf containing a page component
@@ -111,13 +116,16 @@ public class MenuTreeComponent {
         }
 
         String currSectionTitle = StringHelpers.transformFieldName(currSection);
-        String currSectionDesc = sectionTextDisplay.found(currSection)
-                ? sectionTextDisplay.get(currSection)
-                : "";
 
-        TreeItem<BaseItemValue> currSectionItem = new TreeItem<>(new SectionPageItemValue(
-                currSectionTitle, currSectionDesc
-        ));
+        if(sectionDisplays.containsKey(currSection)) {
+            currSectionItem = new TreeItem<>(new SectionPageItemValue(
+                    currSectionTitle, sectionDisplays.get(currSection)));
+        } else {
+            currSectionItem = new TreeItem<>(new SectionPageItemValue(
+                    currSectionTitle, sectionTextDisplay.get(currSection)
+            ));
+        }
+
         currSectionItem.getChildren().addAll(childrenSections);
 
         return currSectionItem;
