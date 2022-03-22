@@ -1,11 +1,11 @@
-package org.computerspecsviewer.gui.views.infoquery.fieldcomponents;
+package org.computerspecsviewer.gui.views.page.infoquery.fieldcomponents;
 
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
 import org.computerspecsviewer.displaytypes.customlist.CustomList;
 import org.computerspecsviewer.gui.utils.ComponentHelpers;
 import org.computerspecsviewer.gui.utils.FieldType;
-import org.computerspecsviewer.gui.views.infoquery.InfoQueryComponent;
+import org.computerspecsviewer.gui.views.page.infoquery.InfoQueryComponent;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 
 import java.util.ArrayList;

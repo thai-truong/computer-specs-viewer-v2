@@ -1,4 +1,4 @@
-package org.computerspecsviewer.gui.views.infoquery;
+package org.computerspecsviewer.gui.views.page.infoquery;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -9,8 +9,8 @@ import javafx.scene.layout.VBox;
 import org.computerspecsviewer.displaytypes.customlist.CustomList;
 import org.computerspecsviewer.gui.utils.ComponentHelpers;
 import org.computerspecsviewer.gui.utils.FieldType;
-import org.computerspecsviewer.gui.views.infoquery.fieldcomponents.CustomListComponent;
-import org.computerspecsviewer.gui.views.infoquery.fieldcomponents.NormalFieldComponent;
+import org.computerspecsviewer.gui.views.page.infoquery.fieldcomponents.CustomListComponent;
+import org.computerspecsviewer.gui.views.page.infoquery.fieldcomponents.NormalFieldComponent;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 
 import java.util.ArrayList;

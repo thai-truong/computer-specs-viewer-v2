@@ -8,8 +8,8 @@ import org.computerspecsviewer.gui.data.SectionTextDisplay;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.BaseItemValue;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.RootItemValue;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.SectionPageItemValue;
+import org.computerspecsviewer.gui.views.page.PageNavigationLinks;
 import org.computerspecsviewer.infoquery.utils.StringHelpers;
-import oshi.util.tuples.Pair;
 import oshi.util.tuples.Triplet;
 
 import java.util.ArrayList;
@@ -72,6 +72,9 @@ public class MenuTreeComponent {
 
             if(componentToDisplay != null) {
                 appDisplayComponent.setCenter(componentToDisplay);
+
+                PageNavigationLinks navLinks = new PageNavigationLinks(selectedItem, menuTree.getSelectionModel());
+                appDisplayComponent.setTop(navLinks.get());
             }
         });
     }
@@ -80,7 +83,10 @@ public class MenuTreeComponent {
         List<TreeItem<BaseItemValue>> topLevelSections = new ArrayList<>();
 
         for(String section: sectionStructure.keySet()) {
-            topLevelSections.add(createTreeItem(section));
+            TreeItem<BaseItemValue> topLevelSection = createTreeItem(section);
+            topLevelSection.getValue().setParent(null);
+
+            topLevelSections.add(topLevelSection);
         }
 
         treePrimaryItem = topLevelSections.get(0);
@@ -127,7 +133,27 @@ public class MenuTreeComponent {
         }
 
         currSectionItem.getChildren().addAll(childrenSections);
+        setSectionChildrenConnections(childrenSections);
 
         return currSectionItem;
+    }
+
+    private void setSectionChildrenConnections(List<TreeItem<BaseItemValue>> children) {
+        for(int i = 0; i < children.size(); i++) {
+            TreeItem<BaseItemValue> curr = children.get(i);
+
+            int prevIdx = i - 1;
+            int nextIdx = i + 1;
+
+            if(prevIdx >= 0) {
+                curr.getValue().setPrev(children.get(prevIdx));
+            }
+
+            if(nextIdx < children.size()) {
+                curr.getValue().setNext(children.get(nextIdx));
+            }
+
+            curr.getValue().setParent(curr.getParent());
+        }
     }
 }

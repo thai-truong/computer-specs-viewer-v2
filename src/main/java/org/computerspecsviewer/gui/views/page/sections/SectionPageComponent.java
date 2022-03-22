@@ -1,4 +1,4 @@
-package org.computerspecsviewer.gui.views.sections;
+package org.computerspecsviewer.gui.views.page.sections;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;

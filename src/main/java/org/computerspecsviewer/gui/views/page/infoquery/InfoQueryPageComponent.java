@@ -1,4 +1,4 @@
-package org.computerspecsviewer.gui.views.infoquery;
+package org.computerspecsviewer.gui.views.page.infoquery;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
