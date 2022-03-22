@@ -7,9 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InfoQueryTextDisplay {
+    private static InfoQueryTextDisplay singleton;
     private Map<String, Triplet<String, String, String>> textDisplayInfoMap;
 
-    public InfoQueryTextDisplay() {
+    private InfoQueryTextDisplay() {
         textDisplayInfoMap = new HashMap<>();
 
         String compSysDesc = "Contains information about the Computer System";
@@ -39,6 +40,14 @@ public class InfoQueryTextDisplay {
         textDisplayInfoMap.put("operatingSystem", createTextDisplayInfo("os", osDesc, true));
         textDisplayInfoMap.put("fileSystem", createTextDisplayInfo("fileSystem", fileSystemDesc, false));
         textDisplayInfoMap.put("networkStatistics", createTextDisplayInfo("networkStatistics", networkStatsDesc, false));
+    }
+
+    public static synchronized InfoQueryTextDisplay getInstance() {
+        if(singleton == null) {
+            singleton = new InfoQueryTextDisplay();
+        }
+
+        return singleton;
     }
 
     public boolean found(String infoType) {

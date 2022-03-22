@@ -23,7 +23,10 @@ public class App extends Application {
     private void initializeStage(Stage stage) {
         AppIcons appIcons = new AppIcons();
 
-        stage.setScene(new Scene(createAppContent(), 800, 600));
+        Scene scene = new Scene(createAppContent(), 800, 600);
+        scene.getStylesheets().add("css/hyperlink.css");
+
+        stage.setScene(scene);
         stage.setTitle("Computer Specs Viewer 2.0");
         stage.getIcons().add(appIcons.getMainAppIcon());
     }

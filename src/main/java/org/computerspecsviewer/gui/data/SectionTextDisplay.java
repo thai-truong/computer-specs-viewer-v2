@@ -8,14 +8,23 @@ import java.util.List;
 import java.util.Map;
 
 public class SectionTextDisplay {
+    private static SectionTextDisplay singleton;
     private Map<String, String> textDisplayInfoMap;
 
-    public SectionTextDisplay() {
+    private SectionTextDisplay() {
         textDisplayInfoMap = new HashMap<>();
 
         textDisplayInfoMap.put("systemInformation", "Contains various available information about " +
-                "your system, collected from your system.");
+                "your system, collected from and by itself.");
         textDisplayInfoMap.put("settings", "Contains configuration options and settings of this application");
+    }
+
+    public static synchronized SectionTextDisplay getInstance() {
+        if(singleton == null) {
+            singleton = new SectionTextDisplay();
+        }
+
+        return singleton;
     }
 
     public boolean found(String sectionType) {
@@ -23,7 +32,7 @@ public class SectionTextDisplay {
     }
 
     public String get(String sectionType) {
-        return textDisplayInfoMap.get(sectionType);
+        return textDisplayInfoMap.getOrDefault(sectionType, "");
     }
 
     public List<String> getSectionTypes() {
