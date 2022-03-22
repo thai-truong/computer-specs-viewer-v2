@@ -1,7 +1,7 @@
 package org.computerspecsviewer.gui.views.sections.customdisplay;
 
 import javafx.scene.Node;
-import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.VBox;
@@ -9,6 +9,7 @@ import javafx.scene.text.Text;
 import org.computerspecsviewer.gui.data.SectionTextDisplay;
 import org.computerspecsviewer.gui.views.menutree.itemhandlers.InfoQueryItemHandler;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.BaseItemValue;
+import org.computerspecsviewer.infoquery.utils.StringHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,11 +44,11 @@ public class SystemInformationSectionDisplay {
     }
 
     private void create() {
-        VBox contentBox = new VBox();
+        VBox contentBox = new VBox(10);
 
         contentBox.getChildren().addAll(
                 createSectionTextDisplay(),
-                createQuickAccessButtons()
+                createQuickAccessLinks()
         );
 
         displayComponent = contentBox;
@@ -57,20 +58,23 @@ public class SystemInformationSectionDisplay {
         return new Text(sectionText);
     }
 
-    private Node createQuickAccessButtons() {
-        VBox buttonContainer = new VBox();
-        List<Node> quickAccessButtons = new ArrayList<>();
+    private Node createQuickAccessLinks() {
+        VBox linkContainer = new VBox(3.0);
+
+        List<Node> quickAccessLinks = new ArrayList<>();
+        quickAccessLinks.add(new Text("Here are the quick access links:"));
 
         for(String infoType: systemInfoTypes) {
             TreeItem<BaseItemValue> infoItem = systemInfoItems.get(infoType);
 
-            Button button = new Button(infoItem.toString());
-            button.setOnAction((event) -> treeSelectionModel.select(infoItem));
-            quickAccessButtons.add(button);
+            Hyperlink link = new Hyperlink(StringHelpers.transformFieldName(infoType));
+            link.setOnAction((event) -> treeSelectionModel.select(infoItem));
+            link.setVisited(false);
+            quickAccessLinks.add(link);
         }
 
-        buttonContainer.getChildren().addAll(quickAccessButtons);
+        linkContainer.getChildren().addAll(quickAccessLinks);
 
-        return buttonContainer;
+        return linkContainer;
     }
 }

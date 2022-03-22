@@ -15,7 +15,7 @@ public class SectionTextDisplay {
         textDisplayInfoMap = new HashMap<>();
 
         textDisplayInfoMap.put("systemInformation", "Contains various available information about " +
-                "your system, collected from your system.");
+                "your system, collected from and by itself.");
         textDisplayInfoMap.put("settings", "Contains configuration options and settings of this application");
     }
 
