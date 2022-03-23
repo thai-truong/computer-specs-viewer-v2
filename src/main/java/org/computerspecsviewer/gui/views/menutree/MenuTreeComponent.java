@@ -1,5 +1,6 @@
 package org.computerspecsviewer.gui.views.menutree;
 
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -63,6 +64,7 @@ public class MenuTreeComponent {
         addItemSelectedListener();
         addStructure();
         setTreeDefaults();
+
     }
 
     private void addItemSelectedListener() {
@@ -71,10 +73,10 @@ public class MenuTreeComponent {
             Node componentToDisplay = selectedItem.getValue().getComponentToDisplay();
 
             if(componentToDisplay != null) {
-                appDisplayComponent.setCenter(componentToDisplay);
-
                 PageNavigationLinks navLinks = new PageNavigationLinks(selectedItem, menuTree.getSelectionModel());
+
                 appDisplayComponent.setTop(navLinks.get());
+                appDisplayComponent.setCenter(componentToDisplay);
             }
         });
     }
@@ -95,9 +97,7 @@ public class MenuTreeComponent {
 
     private void setTreeDefaults() {
         treePrimaryItem.setExpanded(true);
-
-        Integer primaryItemIdx = menuTree.getRow(treePrimaryItem);
-        menuTree.getSelectionModel().select(primaryItemIdx);
+        menuTree.getSelectionModel().select(treePrimaryItem);
     }
     
     private TreeItem<BaseItemValue> createTreeItem(String currSection) {

@@ -1,10 +1,15 @@
 package org.computerspecsviewer.gui.views.page;
 
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.MultipleSelectionModel;
-import javafx.scene.control.TreeItem;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import org.computerspecsviewer.gui.assets.AppIcons;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.BaseItemValue;
 
 import java.util.ArrayList;
@@ -14,14 +19,14 @@ public class PageNavigationLinks {
     private final TreeItem<BaseItemValue> target;
     private final MultipleSelectionModel<TreeItem<BaseItemValue>> treeSelectionModel;
 
-    private Node linkContainer;
+    private Pane linkContainer;
 
     public PageNavigationLinks(TreeItem<BaseItemValue> target, MultipleSelectionModel<TreeItem<BaseItemValue>> treeSelectionModel) {
         this.target = target;
         this.treeSelectionModel = treeSelectionModel;
     }
 
-    public Node get() {
+    public Pane get() {
         if(linkContainer == null) {
             create();
         }
@@ -35,27 +40,54 @@ public class PageNavigationLinks {
         TreeItem<BaseItemValue> next = target.getValue().getNext();
 
         if(parent == null && prev == null && next == null) {
+            linkContainer = new VBox();
             return;
         }
 
+        VBox linkBoxWithSeparator = new VBox();
         HBox linkBox = new HBox();
-        List<Hyperlink> links = new ArrayList<>();
+        List<Node> links = new ArrayList<>();
+        AppIcons icons = new AppIcons();
 
-        addLink(links, "Prev", prev);
-        addLink(links, "Back To Section Page", parent);
-        addLink(links, "Next", next);
+        Hyperlink prevLink = getLink(links, prev, "Prev");
+        links.add(new Separator(Orientation.VERTICAL));
+        Hyperlink parentLink = getLink(links, parent, "Back To Section Page");
+        links.add(new Separator(Orientation.VERTICAL));
+        Hyperlink nextLink = getLink(links, next, "Next");
+
+        if(prevLink != null) {
+            prevLink.setGraphic(icons.getPrevIcon());
+            HBox.setHgrow(prevLink, Priority.ALWAYS);
+        }
+
+        if(parentLink != null) {
+            parentLink.setGraphic(icons.getHomeIcon());
+            HBox.setHgrow(parentLink, Priority.ALWAYS);
+        }
+
+        if(nextLink != null) {
+            nextLink.setGraphic(icons.getNextIcon());
+            nextLink.setContentDisplay(ContentDisplay.RIGHT);
+
+            HBox.setHgrow(nextLink, Priority.ALWAYS);
+        }
 
         linkBox.getChildren().addAll(links);
-        linkContainer = linkBox;
+        linkBox.setAlignment(Pos.CENTER);
+
+        linkBoxWithSeparator.getChildren().addAll(linkBox, new Separator());
+        linkContainer = linkBoxWithSeparator;
     }
 
-    private void addLink(List<Hyperlink> links, String text, TreeItem<BaseItemValue> toSelect) {
+    private Hyperlink getLink(List<Node> links, TreeItem<BaseItemValue> toSelect, String text) {
         if(toSelect == null) {
-            return;
+            return null;
         }
 
         Hyperlink link = new Hyperlink(text);
         link.setOnAction((event -> treeSelectionModel.select(toSelect)));
+
         links.add(link);
+        return link;
     }
 }
