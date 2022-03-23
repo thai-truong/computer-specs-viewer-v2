@@ -1,10 +1,10 @@
 package org.computerspecsviewer.gui.views.menutree.itemvalue;
 
 import javafx.scene.Node;
-import org.computerspecsviewer.gui.views.infoquery.InfoQueryPageComponent;
+import org.computerspecsviewer.gui.views.page.infoquery.InfoQueryPageComponent;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 
-public class InfoQueryPageItemValue implements BaseItemValue {
+public class InfoQueryPageItemValue extends BaseItemValue {
     private String treeLabel;
     private String title;
     private String description;

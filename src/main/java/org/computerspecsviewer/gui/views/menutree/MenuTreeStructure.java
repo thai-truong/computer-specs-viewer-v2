@@ -3,11 +3,9 @@ package org.computerspecsviewer.gui.views.menutree;
 import javafx.scene.Node;
 import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
 import org.computerspecsviewer.gui.views.menutree.itemhandlers.InfoQueryItemHandler;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.BaseItemValue;
-import org.computerspecsviewer.gui.views.sections.customdisplay.SystemInformationSectionDisplay;
-import oshi.util.tuples.Pair;
+import org.computerspecsviewer.gui.views.page.sections.customdisplay.SystemInformationSectionDisplay;
 import oshi.util.tuples.Triplet;
 
 import java.util.*;

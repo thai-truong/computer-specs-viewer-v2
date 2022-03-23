@@ -2,9 +2,9 @@ package org.computerspecsviewer.gui.views.menutree.itemvalue;
 
 import javafx.scene.Node;
 import javafx.scene.text.Text;
-import org.computerspecsviewer.gui.views.sections.SectionPageComponent;
+import org.computerspecsviewer.gui.views.page.sections.SectionPageComponent;
 
-public class SectionPageItemValue implements BaseItemValue {
+public class SectionPageItemValue extends BaseItemValue {
     private String itemLabel;
     private Node displayComponent;
     private SectionPageComponent sectionPage;

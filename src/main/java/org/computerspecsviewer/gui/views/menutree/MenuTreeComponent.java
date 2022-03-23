@@ -1,5 +1,6 @@
 package org.computerspecsviewer.gui.views.menutree;
 
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -8,8 +9,8 @@ import org.computerspecsviewer.gui.data.SectionTextDisplay;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.BaseItemValue;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.RootItemValue;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.SectionPageItemValue;
+import org.computerspecsviewer.gui.views.page.PageNavigationLinks;
 import org.computerspecsviewer.infoquery.utils.StringHelpers;
-import oshi.util.tuples.Pair;
 import oshi.util.tuples.Triplet;
 
 import java.util.ArrayList;
@@ -63,6 +64,7 @@ public class MenuTreeComponent {
         addItemSelectedListener();
         addStructure();
         setTreeDefaults();
+
     }
 
     private void addItemSelectedListener() {
@@ -71,6 +73,9 @@ public class MenuTreeComponent {
             Node componentToDisplay = selectedItem.getValue().getComponentToDisplay();
 
             if(componentToDisplay != null) {
+                PageNavigationLinks navLinks = new PageNavigationLinks(selectedItem, menuTree.getSelectionModel());
+
+                appDisplayComponent.setTop(navLinks.get());
                 appDisplayComponent.setCenter(componentToDisplay);
             }
         });
@@ -80,7 +85,10 @@ public class MenuTreeComponent {
         List<TreeItem<BaseItemValue>> topLevelSections = new ArrayList<>();
 
         for(String section: sectionStructure.keySet()) {
-            topLevelSections.add(createTreeItem(section));
+            TreeItem<BaseItemValue> topLevelSection = createTreeItem(section);
+            topLevelSection.getValue().setParent(null);
+
+            topLevelSections.add(topLevelSection);
         }
 
         treePrimaryItem = topLevelSections.get(0);
@@ -89,9 +97,7 @@ public class MenuTreeComponent {
 
     private void setTreeDefaults() {
         treePrimaryItem.setExpanded(true);
-
-        Integer primaryItemIdx = menuTree.getRow(treePrimaryItem);
-        menuTree.getSelectionModel().select(primaryItemIdx);
+        menuTree.getSelectionModel().select(treePrimaryItem);
     }
     
     private TreeItem<BaseItemValue> createTreeItem(String currSection) {
@@ -127,7 +133,27 @@ public class MenuTreeComponent {
         }
 
         currSectionItem.getChildren().addAll(childrenSections);
+        setSectionChildrenConnections(childrenSections);
 
         return currSectionItem;
+    }
+
+    private void setSectionChildrenConnections(List<TreeItem<BaseItemValue>> children) {
+        for(int i = 0; i < children.size(); i++) {
+            TreeItem<BaseItemValue> curr = children.get(i);
+
+            int prevIdx = i - 1;
+            int nextIdx = i + 1;
+
+            if(prevIdx >= 0) {
+                curr.getValue().setPrev(children.get(prevIdx));
+            }
+
+            if(nextIdx < children.size()) {
+                curr.getValue().setNext(children.get(nextIdx));
+            }
+
+            curr.getValue().setParent(curr.getParent());
+        }
     }
 }

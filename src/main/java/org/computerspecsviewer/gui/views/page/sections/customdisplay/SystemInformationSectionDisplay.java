@@ -1,4 +1,4 @@
-package org.computerspecsviewer.gui.views.sections.customdisplay;
+package org.computerspecsviewer.gui.views.page.sections.customdisplay;
 
 import javafx.scene.Node;
 import javafx.scene.control.Hyperlink;
@@ -69,7 +69,7 @@ public class SystemInformationSectionDisplay {
 
             Hyperlink link = new Hyperlink(StringHelpers.transformFieldName(infoType));
             link.setOnAction((event) -> treeSelectionModel.select(infoItem));
-            link.setVisited(false);
+
             quickAccessLinks.add(link);
         }
 
