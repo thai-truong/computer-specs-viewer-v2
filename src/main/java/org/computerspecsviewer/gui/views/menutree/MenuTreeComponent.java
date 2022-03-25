@@ -1,10 +1,12 @@
 package org.computerspecsviewer.gui.views.menutree;
 
-import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import org.computerspecsviewer.gui.data.SectionTextDisplay;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.BaseItemValue;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.RootItemValue;
@@ -21,7 +23,7 @@ public class MenuTreeComponent {
     private TreeView<BaseItemValue> menuTree;
     private Map<String, List<String>> sectionStructure;
     private Map<String, TreeItem<BaseItemValue>> leafSections;
-    private Map<String, Node> sectionDisplays;
+    private Map<String, Boolean> toDisplayLinks;
     private SectionTextDisplay sectionTextDisplay;
 
     private BorderPane appDisplayComponent;
@@ -54,23 +56,24 @@ public class MenuTreeComponent {
     }
 
     private void configureMenuTree() {
-        MenuTreeStructure structure = new MenuTreeStructure(menuTree.getSelectionModel());
-        Triplet<Map<String, List<String>>, Map<String, TreeItem<BaseItemValue>>, Map<String, Node>> structureDetails = structure.get();
+        MenuTreeStructure structure = new MenuTreeStructure();
+        Triplet<Map<String, List<String>>, Map<String,
+                TreeItem<BaseItemValue>>, Map<String, Boolean>> structureDetails = structure.get();
 
         sectionStructure = structureDetails.getA();
         leafSections = structureDetails.getB();
-        sectionDisplays = structureDetails.getC();
+        toDisplayLinks = structureDetails.getC();
 
         addItemSelectedListener();
         addStructure();
-        setTreeDefaults();
+        addTreeDefaults();
 
     }
 
     private void addItemSelectedListener() {
         menuTree.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             TreeItem<BaseItemValue> selectedItem = newValue;
-            Node componentToDisplay = selectedItem.getValue().getComponentToDisplay();
+            Node componentToDisplay = selectedItem.getValue().getComponent();
 
             if(componentToDisplay != null) {
                 PageNavigationLinks navLinks = new PageNavigationLinks(selectedItem, menuTree.getSelectionModel());
@@ -95,7 +98,7 @@ public class MenuTreeComponent {
         treeRoot.getChildren().addAll(topLevelSections);
     }
 
-    private void setTreeDefaults() {
+    private void addTreeDefaults() {
         treePrimaryItem.setExpanded(true);
         menuTree.getSelectionModel().select(treePrimaryItem);
     }
@@ -122,18 +125,13 @@ public class MenuTreeComponent {
         }
 
         String currSectionTitle = StringHelpers.transformFieldName(currSection);
-
-        if(sectionDisplays.containsKey(currSection)) {
-            currSectionItem = new TreeItem<>(new SectionPageItemValue(
-                    currSectionTitle, sectionDisplays.get(currSection)));
-        } else {
-            currSectionItem = new TreeItem<>(new SectionPageItemValue(
-                    currSectionTitle, sectionTextDisplay.get(currSection)
-            ));
-        }
+        currSectionItem = new TreeItem<>(new SectionPageItemValue(
+                currSectionTitle, sectionTextDisplay.get(currSection)
+        ));
 
         currSectionItem.getChildren().addAll(childrenSections);
         setSectionChildrenConnections(childrenSections);
+        setSectionLinks(currSectionItem, toDisplayLinks.get(currSection));
 
         return currSectionItem;
     }
@@ -155,5 +153,27 @@ public class MenuTreeComponent {
 
             curr.getValue().setParent(curr.getParent());
         }
+    }
+
+    private void setSectionLinks(TreeItem<BaseItemValue> section, Boolean toSet) {
+        if(toSet == null || !toSet) {
+            return;
+        }
+
+        List<Node> quickAccessLinks = new ArrayList<>();
+        VBox linkComponent = new VBox(3.0);
+        List<TreeItem<BaseItemValue>> children = section.getChildren();
+
+        quickAccessLinks.add(new Text("Here are the quick access links:"));
+
+        for(TreeItem<BaseItemValue> child: children) {
+            Hyperlink link = new Hyperlink(child.getValue().toString());
+            link.setOnAction((event) -> menuTree.getSelectionModel().select(child));
+
+            quickAccessLinks.add(link);
+        }
+
+        linkComponent.getChildren().addAll(quickAccessLinks);
+        section.getValue().appendToComponent(linkComponent);
     }
 }
