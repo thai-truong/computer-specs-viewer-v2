@@ -11,7 +11,7 @@ public class AppIcons {
     private ImageView homeIcon;
 
     public AppIcons() {
-        mainAppIcon = new Image("icons/app1.png");
+        mainAppIcon = new Image("icons/appicon.png");
 
         prevIcon = new ImageView("icons/prev.png");
         nextIcon = new ImageView("icons/next.png");
