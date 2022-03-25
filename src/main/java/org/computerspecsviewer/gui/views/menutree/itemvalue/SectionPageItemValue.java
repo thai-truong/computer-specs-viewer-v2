@@ -1,13 +1,13 @@
 package org.computerspecsviewer.gui.views.menutree.itemvalue;
 
 import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import org.computerspecsviewer.gui.views.page.sections.SectionPageComponent;
 
 public class SectionPageItemValue extends BaseItemValue {
     private String itemLabel;
     private Node displayComponent;
-    private SectionPageComponent sectionPage;
 
     public SectionPageItemValue(String itemLabel, String description) {
         this.itemLabel = itemLabel;
@@ -23,11 +23,12 @@ public class SectionPageItemValue extends BaseItemValue {
         return itemLabel;
     }
 
-    public Node getComponentToDisplay() {
-        if(sectionPage == null) {
-            sectionPage = new SectionPageComponent(itemLabel, displayComponent);
+    public Pane getComponent() {
+        if(component == null) {
+            SectionPageComponent sectionPage = new SectionPageComponent(itemLabel, displayComponent);
+            component = sectionPage.get();
         }
 
-        return sectionPage.get();
+        return component;
     }
 }

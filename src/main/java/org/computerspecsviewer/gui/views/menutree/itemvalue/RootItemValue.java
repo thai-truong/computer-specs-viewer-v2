@@ -1,7 +1,7 @@
 package org.computerspecsviewer.gui.views.menutree.itemvalue;
 
-import javafx.scene.Node;
-import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 public class RootItemValue extends BaseItemValue {
     public RootItemValue() {}
@@ -10,7 +10,7 @@ public class RootItemValue extends BaseItemValue {
         return "";
     }
 
-    public Node getComponentToDisplay() {
-        return new Label("");
+    public Pane getComponent() {
+        return new VBox();
     }
 }
