@@ -13,8 +13,6 @@ import org.computerspecsviewer.gui.views.page.infoquery.fieldcomponents.CustomLi
 import org.computerspecsviewer.gui.views.page.infoquery.fieldcomponents.NormalFieldComponent;
 import org.computerspecsviewer.infoquery.base.BaseInfoQuery;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class InfoQueryComponent {
@@ -44,13 +42,10 @@ public class InfoQueryComponent {
             CustomListComponent listComponent = new CustomListComponent(foundSingleList);
             infoQueryComponent.getChildren().addAll(listComponent.get());
         } else {
-            List<Node> allFields = new ArrayList<>();
-
             for(Map.Entry<String, Object> entry: rawFieldsMap.entrySet()) {
+                Node componentToAdd;
                 String fieldName = entry.getKey();
                 Object fieldValue = entry.getValue();
-
-                Node componentToAdd;
 
                 switch(ComponentHelpers.getFieldType(fieldValue)) {
                     case LIST -> componentToAdd = createListField(fieldName, (CustomList<?>) fieldValue);
@@ -61,10 +56,8 @@ public class InfoQueryComponent {
                     }
                 }
 
-                allFields.add(componentToAdd);
+                infoQueryComponent.getChildren().add(componentToAdd);
             }
-
-            infoQueryComponent.getChildren().addAll(allFields);
         }
     }
 

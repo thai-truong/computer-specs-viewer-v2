@@ -8,6 +8,10 @@ import org.computerspecsviewer.gui.assets.AppIcons;
 import org.computerspecsviewer.gui.mainapp.approot.AppRootComponent;
 
 public class App extends Application {
+    private static final String APP_TITLE = "Computer Specs Viewer 2.0";
+    private static final Double APP_WIDTH = 800.0;
+    private static final Double APP_HEIGHT = 600.0;
+
     // This will be the place to initialize all needed UI components/elements
     private Parent createAppContent() {
         AppRootComponent appRoot = new AppRootComponent();
@@ -21,13 +25,13 @@ public class App extends Application {
     }
 
     private void initializeStage(Stage stage) {
-        AppIcons appIcons = new AppIcons();
+        AppIcons appIcons = AppIcons.getInstance();
 
-        Scene scene = new Scene(createAppContent(), 800, 600);
+        Scene scene = new Scene(createAppContent(), APP_WIDTH, APP_HEIGHT);
         scene.getStylesheets().add("css/hyperlink.css");
 
         stage.setScene(scene);
-        stage.setTitle("Computer Specs Viewer 2.0");
+        stage.setTitle(APP_TITLE);
         stage.getIcons().add(appIcons.getMainAppIcon());
     }
 

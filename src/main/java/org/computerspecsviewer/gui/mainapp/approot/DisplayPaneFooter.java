@@ -5,8 +5,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class DisplayPaneFooter {
-    private final String footerText = "- Computer Specs Viewer 2.0 (Made with Java this time) -";
-    private final Integer fontSize = 12;
+    private static final String FOOTER_TEXT = "- Computer Specs Viewer 2.0 (Made with Java this time) -";
+    private static final Integer FONT_SIZE = 12;
 
     private Text footerComponent;
 
@@ -21,8 +21,8 @@ public class DisplayPaneFooter {
     }
 
     private void create() {
-        footerComponent = new Text(footerText);
-        footerComponent.setFont(new Font(fontSize));
+        footerComponent = new Text(FOOTER_TEXT);
+        footerComponent.setFont(new Font(FONT_SIZE));
         footerComponent.setFill(Color.DARKGRAY);
     }
 }

@@ -7,9 +7,9 @@ import javafx.scene.layout.Pane;
 public abstract class BaseItemValue {
     protected Pane component;
 
-    public TreeItem<BaseItemValue> parent;
-    public TreeItem<BaseItemValue> prev;
-    public TreeItem<BaseItemValue> next;
+    protected TreeItem<BaseItemValue> parent;
+    protected TreeItem<BaseItemValue> prev;
+    protected TreeItem<BaseItemValue> next;
 
     public abstract String toString();
     public abstract Pane getComponent();

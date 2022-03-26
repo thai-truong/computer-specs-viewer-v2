@@ -89,9 +89,11 @@ public class MenuTreeComponent {
 
         for(String section: sectionStructure.keySet()) {
             TreeItem<BaseItemValue> topLevelSection = createTreeItem(section);
-            topLevelSection.getValue().setParent(null);
 
-            topLevelSections.add(topLevelSection);
+            if(topLevelSection != null) {
+                topLevelSection.getValue().setParent(null);
+                topLevelSections.add(topLevelSection);
+            }
         }
 
         treePrimaryItem = topLevelSections.get(0);
@@ -129,6 +131,8 @@ public class MenuTreeComponent {
                 currSectionTitle, sectionTextDisplay.get(currSection)
         ));
 
+        // Add new children items to current section item, then connect those children items together, and lastly
+        // add links to the new children items to current section item
         currSectionItem.getChildren().addAll(childrenSections);
         setSectionChildrenConnections(childrenSections);
         setSectionLinks(currSectionItem, toDisplayLinks.get(currSection));
