@@ -46,7 +46,7 @@ public class PageNavigationLinks {
         VBox linkBoxWithSeparator = new VBox();
         HBox linkBox = new HBox();
         List<Node> links = new ArrayList<>();
-        AppIcons icons = new AppIcons();
+        AppIcons icons = AppIcons.getInstance();
 
         Hyperlink prevLink = getLink(links, prev, "Prev");
         links.add(new Separator(Orientation.VERTICAL));

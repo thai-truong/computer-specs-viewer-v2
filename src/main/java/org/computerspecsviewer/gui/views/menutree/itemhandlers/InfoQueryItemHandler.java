@@ -11,27 +11,11 @@ import java.util.*;
 
 public class InfoQueryItemHandler {
     private Map<String, Quartet<String, String, String, BaseInfoQuery>> infoQueryDisplayMap;
-    private List<TreeItem<BaseItemValue>> converted = new ArrayList<>();
     private Map<String, TreeItem<BaseItemValue>> convertedMap = new HashMap<>();
 
     public InfoQueryItemHandler() {
         InfoQueryViewModel infoQueryViewModel = InfoQueryViewModel.getInstance();
         infoQueryDisplayMap = infoQueryViewModel.getInfoQueryMap();
-    }
-
-    public List<TreeItem<BaseItemValue>> getItems() {
-        if(converted.size() == 0) {
-            for(Quartet<String, String, String, BaseInfoQuery> elem: infoQueryDisplayMap.values()) {
-                String treeLabel = elem.getA();
-                String title = elem.getB();
-                String desc = elem.getC();
-                BaseInfoQuery infoQuery = elem.getD();
-
-                converted.add(new TreeItem(new InfoQueryPageItemValue(treeLabel, title, desc, infoQuery)));
-            }
-        }
-
-        return converted;
     }
 
     public Map<String, TreeItem<BaseItemValue>> getItemsMap() {
