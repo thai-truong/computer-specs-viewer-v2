@@ -1,3 +1,8 @@
-.hyperlink:visited {
-    -fx-text-fill: purple;
+.hyperlink {
+    -fx-underline: false;
+    -fx-text-fill: #6495ED;
+}
+
+.hyperlink:hover {
+    -fx-underline: true;
 }

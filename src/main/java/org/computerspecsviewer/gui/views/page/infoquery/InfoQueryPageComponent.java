@@ -25,8 +25,6 @@ public class InfoQueryPageComponent extends PageComponent {
         Text pageDescription = new Text(description);
         InfoQueryComponent infoQueryComponent = new InfoQueryComponent(infoQuery);
 
-        page = new VBox(vBoxSpacing);
-
         page.getChildren().addAll(pageTitle,
                 new Separator(), pageDescription,
                 new Separator(), addScroller(infoQueryComponent.get()));

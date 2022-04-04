@@ -62,6 +62,18 @@ public class SettingsModel {
         writeLines(currSettings);
     }
 
+    public void saveSettingsChange(String settingsType, String newValue) {
+        List<String> currSettings = getAllSettings();
+
+        if(!settingsIndexMap.containsKey(settingsType)) {
+            return;
+        }
+
+        Integer index = settingsIndexMap.get(settingsType).getLineIndex();
+        currSettings.set(index, newValue);
+        writeLines(currSettings);
+    }
+
     private void create() throws IOException {
         try {
             configPath = Paths.get(ClassLoader.getSystemResource("config/settings.conf").toURI());
@@ -71,16 +83,13 @@ public class SettingsModel {
         }
 
         if(isFileEmpty()) {
-            System.out.println("File is empty");
             addDefaultConfig();
-        } else {
-            System.out.println(Files.readAllLines(configPath));
         }
     }
 
     private void addDefaultConfig() throws IOException {
         List<String> defaultConfig = Arrays.asList(
-                "black"
+                "Black"
         );
 
         Files.write(configPath, defaultConfig);

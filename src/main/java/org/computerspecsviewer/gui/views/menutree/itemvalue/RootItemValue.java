@@ -11,6 +11,10 @@ public class RootItemValue extends BaseItemValue {
     }
 
     public Pane getComponent() {
-        return new VBox();
+        if(component == null) {
+            component = new VBox();
+        }
+
+        return component;
     }
 }

@@ -3,12 +3,15 @@ package org.computerspecsviewer.gui.views.base;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 public abstract class PageComponent {
+    private static final Integer vBoxSpacing = 2;
     protected Pane page;
 
     public Pane get() {
         if(page == null) {
+            page = new VBox(vBoxSpacing);
             create();
         }
 
