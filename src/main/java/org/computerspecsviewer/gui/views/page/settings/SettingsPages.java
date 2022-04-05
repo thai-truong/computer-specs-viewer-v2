@@ -5,6 +5,7 @@ import javafx.scene.control.TreeItem;
 import org.computerspecsviewer.gui.views.base.PageComponent;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.BaseItemValue;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.PageComponentItemValue;
+import org.computerspecsviewer.gui.views.page.settings.base.SettingsPageComponent;
 import org.computerspecsviewer.gui.views.page.settings.theme.ThemeSettingsPageComponent;
 import org.computerspecsviewer.infoquery.utils.StringHelpers;
 

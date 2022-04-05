@@ -5,20 +5,24 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SettingsModel {
     private static SettingsModel singleton;
 
     private Path configPath;
     private final Map<String, ConfigLineIndex> settingsIndexMap;
+    private String[] allSettingsValues;
 
     private SettingsModel() {
         settingsIndexMap = new HashMap<>();
         settingsIndexMap.put("theme", ConfigLineIndex.THEME);
+
+        allSettingsValues = new String[settingsIndexMap.size()];
+
+        for(int i = 0; i < allSettingsValues.length; i++) {
+            allSettingsValues[i] = "";
+        }
     }
 
     public static SettingsModel getInstance() {
@@ -41,12 +45,10 @@ public class SettingsModel {
             return null;
         }
 
-        return getAllSettings().get(settingsIndexMap.get(settingsType).getLineIndex());
+        return allSettingsValues[settingsIndexMap.get(settingsType).getLineIndex()];
     }
 
     public void saveSettingsChanges(Map<String, String> changes) {
-        List<String> currSettings = getAllSettings();
-
         for(Map.Entry<String, String> change: changes.entrySet()) {
             String settingsType = change.getKey();
             String settingsChange = change.getValue();
@@ -56,22 +58,21 @@ public class SettingsModel {
             }
 
             Integer index = settingsIndexMap.get(settingsType).getLineIndex();
-            currSettings.set(index, settingsChange);
+            allSettingsValues[index] = settingsChange;
         }
-
-        writeLines(currSettings);
     }
 
     public void saveSettingsChange(String settingsType, String newValue) {
-        List<String> currSettings = getAllSettings();
-
         if(!settingsIndexMap.containsKey(settingsType)) {
             return;
         }
 
         Integer index = settingsIndexMap.get(settingsType).getLineIndex();
-        currSettings.set(index, newValue);
-        writeLines(currSettings);
+        allSettingsValues[index] = newValue;
+    }
+
+    public void saveSettingsToFile() {
+        writeLines(List.of(allSettingsValues));
     }
 
     private void create() throws IOException {
@@ -82,21 +83,20 @@ public class SettingsModel {
             return;
         }
 
-        if(isFileEmpty()) {
-            addDefaultConfig();
+        extractInitialSettings();
+    }
+
+    private void extractInitialSettings() {
+        List<String> readLines = getAllSettings();
+
+        if(readLines == null) {
+            return;
         }
-    }
 
-    private void addDefaultConfig() throws IOException {
-        List<String> defaultConfig = Arrays.asList(
-                "Black"
-        );
-
-        Files.write(configPath, defaultConfig);
-    }
-
-    private Boolean isFileEmpty() throws IOException {
-        return Files.size(configPath) == 0;
+        // Size of readLines is always less than or equal to size of allSettingsValues
+        for(int i = 0; i < readLines.size(); i++) {
+            allSettingsValues[i] = readLines.get(i);
+        }
     }
 
     private List<String> getAllSettings() {
@@ -118,17 +118,4 @@ public class SettingsModel {
             System.err.println(e);
         }
     }
-
-    /*public static void main(String[] args) {
-        try {
-            SettingsModel test = SettingsModel.getInstance();
-
-            Map<String, String> testChanges = new HashMap<>();
-            testChanges.put("theme", "white");
-
-            test.saveSettingsChanges(testChanges);
-        } catch (IOException e) {
-            System.out.println("Something weird happened...");
-        }
-    }*/
 }

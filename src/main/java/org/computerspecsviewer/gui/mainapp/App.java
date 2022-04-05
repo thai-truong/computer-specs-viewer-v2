@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.computerspecsviewer.gui.assets.AppIcons;
 import org.computerspecsviewer.gui.mainapp.approot.AppRootComponent;
+import org.computerspecsviewer.gui.models.settings.SettingsModel;
 import org.computerspecsviewer.gui.views.page.settings.SettingsPages;
 
 public class App extends Application {
@@ -38,6 +39,11 @@ public class App extends Application {
         stage.setOnShown((event) -> {
             SettingsPages settingsPages = SettingsPages.getInstance();
             settingsPages.initializeAllSettings(stage.getScene());
+        });
+
+        stage.setOnHiding((event) -> {
+            SettingsModel model = SettingsModel.getInstance();
+            model.saveSettingsToFile();
         });
     }
 

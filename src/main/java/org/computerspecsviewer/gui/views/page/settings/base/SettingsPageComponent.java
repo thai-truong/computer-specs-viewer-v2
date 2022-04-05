@@ -1,4 +1,4 @@
-package org.computerspecsviewer.gui.views.page.settings;
+package org.computerspecsviewer.gui.views.page.settings.base;
 
 import javafx.scene.Scene;
 

@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.computerspecsviewer.gui.viewmodels.settings.SettingsViewModel;
 import org.computerspecsviewer.gui.views.base.PageComponent;
-import org.computerspecsviewer.gui.views.page.settings.SettingsPageComponent;
+import org.computerspecsviewer.gui.views.page.settings.base.SettingsPageComponent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,9 +31,11 @@ public class ThemeSettingsPageComponent extends PageComponent implements Setting
         themeCssMap.put("Gray", "rgba(60, 60, 60, 255)");
         themeCssMap.put("Blue", "#1734d0");
 
-        this.title = title;
         viewModel = SettingsViewModel.getInstance();
-        initialTheme = viewModel.getTheme();
+        String savedTheme = viewModel.getTheme();
+        initialTheme = savedTheme.isEmpty() ? "Black" : savedTheme;
+
+        this.title = title;
     }
 
     protected void create() {
