@@ -3,6 +3,7 @@ package org.computerspecsviewer.gui.views.menutree;
 import javafx.scene.control.TreeItem;
 import org.computerspecsviewer.gui.views.menutree.itemhandlers.InfoQueryItemHandler;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.BaseItemValue;
+import org.computerspecsviewer.gui.views.page.settings.SettingsPages;
 import oshi.util.tuples.Triplet;
 
 import java.util.*;
@@ -41,12 +42,15 @@ public class MenuTreeStructure {
         sectionGraph.put("systemInformation", Arrays.asList("computerSystem", "cpu", "disks", "memory",
                 "graphicsCards", "displayDevices", "networkInterfaces", "powerSources", "soundCards",
                 "usbDevices", "operatingSystem", "fileSystem", "networkStatistics"));
-        sectionGraph.put("settings", Collections.emptyList());
+        sectionGraph.put("settings", Arrays.asList("themeSettings"));
     }
 
     private void setLeafItems() {
         leafItems = new HashMap<>();
         leafItems.putAll(infoQueryHandler.getItemsMap());
+
+        SettingsPages settingsPages = SettingsPages.getInstance();
+        leafItems.putAll(settingsPages.get());
     }
 
     private void setToDisplayLinks() {

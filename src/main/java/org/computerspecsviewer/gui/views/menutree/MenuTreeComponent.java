@@ -8,10 +8,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.computerspecsviewer.gui.data.SectionTextDisplay;
+import org.computerspecsviewer.gui.views.base.PageComponent;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.BaseItemValue;
+import org.computerspecsviewer.gui.views.menutree.itemvalue.PageComponentItemValue;
 import org.computerspecsviewer.gui.views.menutree.itemvalue.RootItemValue;
-import org.computerspecsviewer.gui.views.menutree.itemvalue.SectionPageItemValue;
 import org.computerspecsviewer.gui.views.page.PageNavigationLinks;
+import org.computerspecsviewer.gui.views.page.sections.SectionPageComponent;
 import org.computerspecsviewer.infoquery.utils.StringHelpers;
 import oshi.util.tuples.Triplet;
 
@@ -105,20 +107,20 @@ public class MenuTreeComponent {
         menuTree.getSelectionModel().select(treePrimaryItem);
     }
     
-    private TreeItem<BaseItemValue> createTreeItem(String currSection) {
-        TreeItem<BaseItemValue> currSectionItem;
+    private TreeItem<BaseItemValue> createTreeItem(String section) {
+        TreeItem<BaseItemValue> sectionItem;
         List<TreeItem<BaseItemValue>> childrenSections = new ArrayList<>();
 
         // If a section does not have any child sections, then it must be a leaf containing a page component
-        if(!sectionStructure.containsKey(currSection)) {
-            if(!leafSections.containsKey(currSection)) {
+        if(!sectionStructure.containsKey(section)) {
+            if(!leafSections.containsKey(section)) {
                 return null;
             }
 
-            return leafSections.get(currSection);
+            return leafSections.get(section);
         }
 
-        for(String childSection: sectionStructure.get(currSection)) {
+        for(String childSection: sectionStructure.get(section)) {
             TreeItem<BaseItemValue> childTreeItem = createTreeItem(childSection);
 
             if(childTreeItem != null) {
@@ -126,18 +128,17 @@ public class MenuTreeComponent {
             }
         }
 
-        String currSectionTitle = StringHelpers.transformFieldName(currSection);
-        currSectionItem = new TreeItem<>(new SectionPageItemValue(
-                currSectionTitle, sectionTextDisplay.get(currSection)
-        ));
+        String sectionTitle = StringHelpers.transformFieldName(section);
+        PageComponent sectionPage = new SectionPageComponent(sectionTitle, new Text(sectionTextDisplay.get(section)));
+        sectionItem = new TreeItem<>(new PageComponentItemValue(sectionTitle, sectionPage));
 
         // Add new children items to current section item, then connect those children items together, and lastly
         // add links to the new children items to current section item
-        currSectionItem.getChildren().addAll(childrenSections);
+        sectionItem.getChildren().addAll(childrenSections);
         setSectionChildrenConnections(childrenSections);
-        setSectionLinks(currSectionItem, toDisplayLinks.get(currSection));
+        setSectionLinks(sectionItem, toDisplayLinks.get(section));
 
-        return currSectionItem;
+        return sectionItem;
     }
 
     private void setSectionChildrenConnections(List<TreeItem<BaseItemValue>> children) {
